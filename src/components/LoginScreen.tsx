@@ -2,159 +2,312 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
-import { Building2, Mail, Lock, Chrome } from 'lucide-react';
-import pcpLogo from '@/assets/pcp-logo.png';
+import { Facebook, Chrome, Linkedin } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
+import pcpHeroImage from '@/assets/pcp-lite-hero.png';
 
 interface LoginScreenProps {
   onLogin: () => void;
 }
 
 const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [isSignUp, setIsSignUp] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  });
   const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const validateForm = () => {
+    if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email)) {
+      toast({
+        title: "Email inválido",
+        description: "Por favor, insira um email válido",
+        variant: "destructive",
+      });
+      return false;
+    }
+    
+    if (!formData.password) {
+      toast({
+        title: "Senha obrigatória",
+        description: "Por favor, insira sua senha",
+        variant: "destructive",
+      });
+      return false;
+    }
+
+    if (isSignUp) {
+      if (!formData.name) {
+        toast({
+          title: "Nome obrigatório",
+          description: "Por favor, insira seu nome",
+          variant: "destructive",
+        });
+        return false;
+      }
+      
+      if (formData.password !== formData.confirmPassword) {
+        toast({
+          title: "Senhas não coincidem",
+          description: "Por favor, confirme sua senha corretamente",
+          variant: "destructive",
+        });
+        return false;
+      }
+    }
+
+    return true;
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!validateForm()) return;
+    
     setIsLoading(true);
     
-    // Simulate login delay
+    // Simulate API call
     setTimeout(() => {
       setIsLoading(false);
+      toast({
+        title: "Ação simulada",
+        description: isSignUp ? "Conta criada com sucesso!" : "Login realizado com sucesso!",
+      });
       onLogin();
     }, 1500);
   };
 
-  const handleGoogleLogin = async () => {
+  const handleSocialLogin = (provider: string) => {
     setIsLoading(true);
     
-    // Simulate Google login delay
     setTimeout(() => {
       setIsLoading(false);
+      toast({
+        title: "Ação simulada",
+        description: `Login com ${provider} simulado`,
+      });
       onLogin();
-    }, 2000);
+    }, 1000);
+  };
+
+  const toggleMode = () => {
+    setIsSignUp(!isSignUp);
+    setFormData({ name: '', email: '', password: '', confirmPassword: '' });
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20 flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        {/* Logo and Brand */}
-        <div className="text-center mb-8">
-          <div className="w-20 h-20 bg-gradient-to-br from-primary/20 to-primary/5 rounded-2xl flex items-center justify-center mx-auto mb-4 p-3">
-            <img src={pcpLogo} alt="PCP lite" className="w-full h-full object-contain" />
+    <div className="min-h-screen bg-muted/30 flex items-center justify-center p-4">
+      <div className="w-full max-w-4xl animate-scale-in">
+        {/* Main Card */}
+        <div className="bg-white rounded-2xl shadow-elevated overflow-hidden">
+          <div className="flex flex-col lg:flex-row min-h-[600px]">
+            
+            {/* Left Column - Form */}
+            <div className="flex-1 p-8 lg:p-12 flex flex-col justify-center">
+              <div className="max-w-sm mx-auto w-full">
+                
+                {/* Header */}
+                <div className="text-center mb-8">
+                  <h1 className="text-3xl font-bold text-gray-900 mb-2">
+                    {isSignUp ? 'Criar conta' : 'Entrar'}
+                  </h1>
+                  <p className="text-gray-600 text-sm">
+                    {isSignUp ? 'Cadastre-se para começar' : 'ou use sua conta'}
+                  </p>
+                </div>
+
+                {/* Social Login Buttons - Only show on sign in */}
+                {!isSignUp && (
+                  <div className="flex justify-center gap-4 mb-8">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="icon"
+                      className="w-12 h-12 rounded-full border-2 hover:bg-blue-50 hover:border-blue-200"
+                      onClick={() => handleSocialLogin('Facebook')}
+                      disabled={isLoading}
+                      aria-label="Entrar com Facebook"
+                    >
+                      <Facebook className="h-5 w-5 text-blue-600" />
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="icon"
+                      className="w-12 h-12 rounded-full border-2 hover:bg-red-50 hover:border-red-200"
+                      onClick={() => handleSocialLogin('Google')}
+                      disabled={isLoading}
+                      aria-label="Entrar com Google"
+                    >
+                      <Chrome className="h-5 w-5 text-red-500" />
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      size="icon"
+                      className="w-12 h-12 rounded-full border-2 hover:bg-blue-50 hover:border-blue-200"
+                      onClick={() => handleSocialLogin('LinkedIn')}
+                      disabled={isLoading}
+                      aria-label="Entrar com LinkedIn"
+                    >
+                      <Linkedin className="h-5 w-5 text-blue-700" />
+                    </Button>
+                  </div>
+                )}
+
+                {/* Form */}
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  
+                  {/* Name Field - Only for Sign Up */}
+                  {isSignUp && (
+                    <div className="space-y-2">
+                      <Label htmlFor="name" className="text-sm font-medium text-gray-700">
+                        Nome completo
+                      </Label>
+                      <Input
+                        id="name"
+                        type="text"
+                        placeholder="Seu nome completo"
+                        value={formData.name}
+                        onChange={(e) => handleInputChange('name', e.target.value)}
+                        className="h-12 bg-gray-100 border-0 focus:bg-white focus:ring-2 focus:ring-primary"
+                        required={isSignUp}
+                      />
+                    </div>
+                  )}
+                  
+                  {/* Email Field */}
+                  <div className="space-y-2">
+                    <Label htmlFor="email" className="text-sm font-medium text-gray-700">
+                      Email
+                    </Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="seu@email.com"
+                      value={formData.email}
+                      onChange={(e) => handleInputChange('email', e.target.value)}
+                      className="h-12 bg-gray-100 border-0 focus:bg-white focus:ring-2 focus:ring-primary"
+                      required
+                    />
+                  </div>
+                  
+                  {/* Password Field */}
+                  <div className="space-y-2">
+                    <Label htmlFor="password" className="text-sm font-medium text-gray-700">
+                      Senha
+                    </Label>
+                    <Input
+                      id="password"
+                      type="password"
+                      placeholder="Digite sua senha"
+                      value={formData.password}
+                      onChange={(e) => handleInputChange('password', e.target.value)}
+                      className="h-12 bg-gray-100 border-0 focus:bg-white focus:ring-2 focus:ring-primary"
+                      required
+                    />
+                  </div>
+
+                  {/* Confirm Password - Only for Sign Up */}
+                  {isSignUp && (
+                    <div className="space-y-2">
+                      <Label htmlFor="confirmPassword" className="text-sm font-medium text-gray-700">
+                        Confirmar senha
+                      </Label>
+                      <Input
+                        id="confirmPassword"
+                        type="password"
+                        placeholder="Confirme sua senha"
+                        value={formData.confirmPassword}
+                        onChange={(e) => handleInputChange('confirmPassword', e.target.value)}
+                        className="h-12 bg-gray-100 border-0 focus:bg-white focus:ring-2 focus:ring-primary"
+                        required={isSignUp}
+                      />
+                    </div>
+                  )}
+
+                  {/* Forgot Password - Only for Sign In */}
+                  {!isSignUp && (
+                    <div className="text-center">
+                      <button
+                        type="button"
+                        className="text-sm text-gray-600 hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded"
+                        onClick={() => toast({ title: "Ação simulada", description: "Link de recuperação enviado!" })}
+                      >
+                        Esqueceu sua senha?
+                      </button>
+                    </div>
+                  )}
+
+                  {/* Submit Button */}
+                  <Button 
+                    type="submit" 
+                    className="w-full h-12 bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white font-medium rounded-full transition-all duration-200"
+                    disabled={isLoading}
+                  >
+                    {isLoading ? (
+                      <div className="flex items-center space-x-2">
+                        <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                        <span>{isSignUp ? 'Criando...' : 'Entrando...'}</span>
+                      </div>
+                    ) : (
+                      isSignUp ? 'CRIAR CONTA' : 'ENTRAR'
+                    )}
+                  </Button>
+                </form>
+              </div>
+            </div>
+
+            {/* Right Column - Promotional Panel */}
+            <div className="flex-1 bg-gradient-auth text-white p-8 lg:p-12 flex flex-col justify-center items-center text-center lg:order-last order-first">
+              <div className="max-w-sm">
+                
+                {/* Logo/Image */}
+                <div className="mb-8">
+                  <img 
+                    src={pcpHeroImage} 
+                    alt="PCP Lite - Sistema de Planejamento e Controle da Produção" 
+                    className="mx-auto max-w-full h-auto"
+                  />
+                </div>
+
+                {/* Content */}
+                <div className="mb-8">
+                  <h2 className="text-2xl font-bold mb-4">
+                    {isSignUp ? 'Bem-vindo de volta!' : 'Olá, amigo!'}
+                  </h2>
+                  <p className="text-white/90 leading-relaxed">
+                    PCP Lite — site acadêmico para demonstrar Estratégico, Tático e Operacional com fluxos, dashboards e checklists; entre e continue o estudo
+                  </p>
+                </div>
+
+                {/* Toggle Button */}
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-red-500 px-8 py-3 rounded-full font-medium transition-all duration-200"
+                  onClick={toggleMode}
+                  disabled={isLoading}
+                >
+                  {isSignUp ? 'ENTRAR' : 'CRIAR CONTA'}
+                </Button>
+              </div>
+            </div>
           </div>
-          <h1 className="text-3xl font-bold text-foreground mb-2">PCP lite</h1>
-          <p className="text-muted-foreground">Sistema de Planejamento e Controle</p>
         </div>
 
-        {/* Login Card */}
-        <Card className="border-2 border-border/50 shadow-2xl backdrop-blur-sm bg-card/80">
-          <CardHeader className="space-y-2 text-center">
-            <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center mx-auto mb-2">
-              <Building2 className="h-6 w-6 text-primary" />
-            </div>
-            <CardTitle className="text-2xl font-bold">Acesso ao Sistema</CardTitle>
-            <CardDescription>
-              Entre com suas credenciais para acessar o PCP
-            </CardDescription>
-          </CardHeader>
-          
-          <CardContent className="space-y-6">
-            {/* Login Form */}
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="email" className="text-sm font-medium">
-                  E-mail corporativo
-                </Label>
-                <div className="relative">
-                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="seu.email@empresa.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="pl-10 h-12"
-                    required
-                  />
-                </div>
-              </div>
-              
-              <div className="space-y-2">
-                <Label htmlFor="password" className="text-sm font-medium">
-                  Senha
-                </Label>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-                  <Input
-                    id="password"
-                    type="password"
-                    placeholder="Digite sua senha"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="pl-10 h-12"
-                    required
-                  />
-                </div>
-              </div>
-              
-              <Button 
-                type="submit" 
-                className="w-full h-12 bg-primary hover:bg-primary/90 text-primary-foreground font-medium"
-                disabled={isLoading}
-              >
-                {isLoading ? (
-                  <div className="flex items-center space-x-2">
-                    <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin" />
-                    <span>Entrando...</span>
-                  </div>
-                ) : (
-                  'Entrar no Sistema'
-                )}
-              </Button>
-            </form>
-
-            {/* Separator */}
-            <div className="relative">
-              <Separator className="my-6" />
-              <span className="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-card px-3 text-xs text-muted-foreground">
-                ou continue com
-              </span>
-            </div>
-
-            {/* Google Login */}
-            <Button
-              type="button"
-              variant="outline"
-              className="w-full h-12 border-2 hover:bg-muted/50"
-              onClick={handleGoogleLogin}
-              disabled={isLoading}
-            >
-              <Chrome className="h-5 w-5 mr-3 text-[#4285f4]" />
-              Entrar com Google
-            </Button>
-
-            {/* Footer Links */}
-            <div className="text-center space-y-2 pt-4 border-t border-border/50">
-              <p className="text-xs text-muted-foreground">
-                Problemas para acessar?{' '}
-                <button className="text-primary hover:underline font-medium">
-                  Fale com o suporte
-                </button>
-              </p>
-              <p className="text-xs text-muted-foreground">
-                Sistema seguro e protegido
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Demo Notice */}
-        <div className="text-center mt-6 p-3 bg-primary/5 rounded-xl border border-primary/20">
-          <p className="text-xs text-primary font-medium">
-            🔒 Demonstração - Use qualquer email/senha para entrar
+        {/* Note */}
+        <div className="text-center mt-6 p-4 bg-primary/10 rounded-xl border border-primary/20">
+          <p className="text-sm text-primary font-medium">
+            🎓 Demonstração acadêmica - Funcionalidades simuladas
           </p>
         </div>
       </div>

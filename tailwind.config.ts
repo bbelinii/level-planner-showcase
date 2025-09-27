@@ -138,6 +138,7 @@ export default {
         'gradient-tactical': 'var(--gradient-tactical)',
         'gradient-operational': 'var(--gradient-operational)',
         'gradient-hero': 'var(--gradient-hero)',
+        'gradient-auth': 'var(--gradient-auth)',
       },
       boxShadow: {
         'strategic': 'var(--shadow-strategic)',
