@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Facebook, Chrome, Linkedin } from 'lucide-react';
+import { Chrome } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import pcpHeroImage from '@/assets/pcp-lite-hero.png';
+import pcpLogoNew from '@/assets/pcp-lite-logo-new.png';
 
 interface LoginScreenProps {
   onLogin: () => void;
@@ -104,10 +104,10 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
   };
 
   return (
-    <div className="min-h-screen bg-muted/30 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
       <div className="w-full max-w-4xl animate-scale-in">
         {/* Main Card */}
-        <div className="bg-white rounded-2xl shadow-elevated overflow-hidden">
+        <div className="bg-gray-800 rounded-2xl shadow-elevated overflow-hidden">
           <div className="flex flex-col lg:flex-row min-h-[600px]">
             
             {/* Left Column - Form */}
@@ -116,49 +116,27 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
                 
                 {/* Header */}
                 <div className="text-center mb-8">
-                  <h1 className="text-3xl font-bold text-gray-900 mb-2">
+                  <h1 className="text-3xl font-bold text-white mb-2">
                     {isSignUp ? 'Criar conta' : 'Entrar'}
                   </h1>
-                  <p className="text-gray-600 text-sm">
+                  <p className="text-gray-400 text-sm">
                     {isSignUp ? 'Cadastre-se para começar' : 'ou use sua conta'}
                   </p>
                 </div>
 
                 {/* Social Login Buttons - Only show on sign in */}
                 {!isSignUp && (
-                  <div className="flex justify-center gap-4 mb-8">
+                  <div className="flex justify-center mb-8">
                     <Button
                       type="button"
                       variant="outline"
                       size="icon"
-                      className="w-12 h-12 rounded-full border-2 hover:bg-blue-50 hover:border-blue-200"
-                      onClick={() => handleSocialLogin('Facebook')}
-                      disabled={isLoading}
-                      aria-label="Entrar com Facebook"
-                    >
-                      <Facebook className="h-5 w-5 text-blue-600" />
-                    </Button>
-                    <Button
-                      type="button"
-                      variant="outline"
-                      size="icon"
-                      className="w-12 h-12 rounded-full border-2 hover:bg-red-50 hover:border-red-200"
+                      className="w-12 h-12 rounded-full border-2 border-gray-600 bg-gray-700 hover:bg-gray-600 hover:border-gray-500"
                       onClick={() => handleSocialLogin('Google')}
                       disabled={isLoading}
                       aria-label="Entrar com Google"
                     >
-                      <Chrome className="h-5 w-5 text-red-500" />
-                    </Button>
-                    <Button
-                      type="button"
-                      variant="outline"
-                      size="icon"
-                      className="w-12 h-12 rounded-full border-2 hover:bg-blue-50 hover:border-blue-200"
-                      onClick={() => handleSocialLogin('LinkedIn')}
-                      disabled={isLoading}
-                      aria-label="Entrar com LinkedIn"
-                    >
-                      <Linkedin className="h-5 w-5 text-blue-700" />
+                      <Chrome className="h-5 w-5 text-white" />
                     </Button>
                   </div>
                 )}
@@ -169,7 +147,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
                   {/* Name Field - Only for Sign Up */}
                   {isSignUp && (
                     <div className="space-y-2">
-                      <Label htmlFor="name" className="text-sm font-medium text-gray-700">
+                      <Label htmlFor="name" className="text-sm font-medium text-gray-300">
                         Nome completo
                       </Label>
                       <Input
@@ -178,7 +156,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
                         placeholder="Seu nome completo"
                         value={formData.name}
                         onChange={(e) => handleInputChange('name', e.target.value)}
-                        className="h-12 bg-gray-100 border-0 focus:bg-white focus:ring-2 focus:ring-primary"
+                        className="h-12 bg-gray-700 border-0 text-white placeholder:text-gray-400 focus:bg-gray-600 focus:ring-2 focus:ring-primary"
                         required={isSignUp}
                       />
                     </div>
@@ -186,7 +164,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
                   
                   {/* Email Field */}
                   <div className="space-y-2">
-                    <Label htmlFor="email" className="text-sm font-medium text-gray-700">
+                    <Label htmlFor="email" className="text-sm font-medium text-gray-300">
                       Email
                     </Label>
                     <Input
@@ -195,14 +173,14 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
                       placeholder="seu@email.com"
                       value={formData.email}
                       onChange={(e) => handleInputChange('email', e.target.value)}
-                      className="h-12 bg-gray-100 border-0 focus:bg-white focus:ring-2 focus:ring-primary"
+                      className="h-12 bg-gray-700 border-0 text-white placeholder:text-gray-400 focus:bg-gray-600 focus:ring-2 focus:ring-primary"
                       required
                     />
                   </div>
                   
                   {/* Password Field */}
                   <div className="space-y-2">
-                    <Label htmlFor="password" className="text-sm font-medium text-gray-700">
+                    <Label htmlFor="password" className="text-sm font-medium text-gray-300">
                       Senha
                     </Label>
                     <Input
@@ -211,7 +189,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
                       placeholder="Digite sua senha"
                       value={formData.password}
                       onChange={(e) => handleInputChange('password', e.target.value)}
-                      className="h-12 bg-gray-100 border-0 focus:bg-white focus:ring-2 focus:ring-primary"
+                      className="h-12 bg-gray-700 border-0 text-white placeholder:text-gray-400 focus:bg-gray-600 focus:ring-2 focus:ring-primary"
                       required
                     />
                   </div>
@@ -219,7 +197,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
                   {/* Confirm Password - Only for Sign Up */}
                   {isSignUp && (
                     <div className="space-y-2">
-                      <Label htmlFor="confirmPassword" className="text-sm font-medium text-gray-700">
+                      <Label htmlFor="confirmPassword" className="text-sm font-medium text-gray-300">
                         Confirmar senha
                       </Label>
                       <Input
@@ -228,7 +206,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
                         placeholder="Confirme sua senha"
                         value={formData.confirmPassword}
                         onChange={(e) => handleInputChange('confirmPassword', e.target.value)}
-                        className="h-12 bg-gray-100 border-0 focus:bg-white focus:ring-2 focus:ring-primary"
+                        className="h-12 bg-gray-700 border-0 text-white placeholder:text-gray-400 focus:bg-gray-600 focus:ring-2 focus:ring-primary"
                         required={isSignUp}
                       />
                     </div>
@@ -239,7 +217,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
                     <div className="text-center">
                       <button
                         type="button"
-                        className="text-sm text-gray-600 hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded"
+                        className="text-sm text-gray-400 hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded"
                         onClick={() => toast({ title: "Ação simulada", description: "Link de recuperação enviado!" })}
                       >
                         Esqueceu sua senha?
@@ -273,19 +251,19 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
                 {/* Logo/Image */}
                 <div className="mb-8">
                   <img 
-                    src={pcpHeroImage} 
+                    src={pcpLogoNew} 
                     alt="PCP Lite - Sistema de Planejamento e Controle da Produção" 
-                    className="mx-auto max-w-full h-auto"
+                    className="mx-auto max-w-full h-auto max-h-48"
                   />
                 </div>
 
                 {/* Content */}
                 <div className="mb-8">
                   <h2 className="text-2xl font-bold mb-4">
-                    {isSignUp ? 'Bem-vindo de volta!' : 'Olá, amigo!'}
+                    {isSignUp ? 'Bem-vindo de volta!' : 'Bem-vindo!'}
                   </h2>
                   <p className="text-white/90 leading-relaxed">
-                    PCP Lite — site acadêmico para demonstrar Estratégico, Tático e Operacional com fluxos, dashboards e checklists; entre e continue o estudo
+                    PCP Lite — Sistema de Planejamento e Controle da Produção com fluxos, dashboards e checklists para gestão completa
                   </p>
                 </div>
 
@@ -302,13 +280,6 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Note */}
-        <div className="text-center mt-6 p-4 bg-primary/10 rounded-xl border border-primary/20">
-          <p className="text-sm text-primary font-medium">
-            🎓 Demonstração acadêmica - Funcionalidades simuladas
-          </p>
         </div>
       </div>
     </div>
