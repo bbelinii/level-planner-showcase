@@ -104,10 +104,10 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-slate-900 flex items-center justify-center p-4">
       <div className="w-full max-w-4xl animate-scale-in">
         {/* Main Card */}
-        <div className="bg-gray-800 rounded-2xl shadow-elevated overflow-hidden">
+        <div className="bg-slate-800 rounded-2xl shadow-elevated overflow-hidden border border-slate-700">
           <div className="flex flex-col lg:flex-row min-h-[600px]">
             
             {/* Left Column - Form */}
@@ -131,12 +131,12 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
                       type="button"
                       variant="outline"
                       size="icon"
-                      className="w-12 h-12 rounded-full border-2 border-gray-600 bg-gray-700 hover:bg-gray-600 hover:border-gray-500"
+                      className="w-12 h-12 rounded-full border-2 border-slate-600 bg-slate-700 hover:bg-slate-600 hover:border-blue-500 text-white"
                       onClick={() => handleSocialLogin('Google')}
                       disabled={isLoading}
                       aria-label="Entrar com Google"
                     >
-                      <Chrome className="h-5 w-5 text-white" />
+                      <Chrome className="h-5 w-5" />
                     </Button>
                   </div>
                 )}
@@ -147,7 +147,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
                   {/* Name Field - Only for Sign Up */}
                   {isSignUp && (
                     <div className="space-y-2">
-                      <Label htmlFor="name" className="text-sm font-medium text-gray-300">
+                      <Label htmlFor="name" className="text-sm font-medium text-slate-300">
                         Nome completo
                       </Label>
                       <Input
@@ -156,7 +156,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
                         placeholder="Seu nome completo"
                         value={formData.name}
                         onChange={(e) => handleInputChange('name', e.target.value)}
-                        className="h-12 bg-gray-700 border-0 text-white placeholder:text-gray-400 focus:bg-gray-600 focus:ring-2 focus:ring-primary"
+                        className="h-12 bg-slate-700 border-0 text-white placeholder:text-slate-400 focus:bg-slate-600 focus:ring-2 focus:ring-blue-500"
                         required={isSignUp}
                       />
                     </div>
@@ -164,7 +164,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
                   
                   {/* Email Field */}
                   <div className="space-y-2">
-                    <Label htmlFor="email" className="text-sm font-medium text-gray-300">
+                    <Label htmlFor="email" className="text-sm font-medium text-slate-300">
                       Email
                     </Label>
                     <Input
@@ -173,14 +173,14 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
                       placeholder="seu@email.com"
                       value={formData.email}
                       onChange={(e) => handleInputChange('email', e.target.value)}
-                      className="h-12 bg-gray-700 border-0 text-white placeholder:text-gray-400 focus:bg-gray-600 focus:ring-2 focus:ring-primary"
+                      className="h-12 bg-slate-700 border-0 text-white placeholder:text-slate-400 focus:bg-slate-600 focus:ring-2 focus:ring-blue-500"
                       required
                     />
                   </div>
                   
                   {/* Password Field */}
                   <div className="space-y-2">
-                    <Label htmlFor="password" className="text-sm font-medium text-gray-300">
+                    <Label htmlFor="password" className="text-sm font-medium text-slate-300">
                       Senha
                     </Label>
                     <Input
@@ -189,7 +189,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
                       placeholder="Digite sua senha"
                       value={formData.password}
                       onChange={(e) => handleInputChange('password', e.target.value)}
-                      className="h-12 bg-gray-700 border-0 text-white placeholder:text-gray-400 focus:bg-gray-600 focus:ring-2 focus:ring-primary"
+                      className="h-12 bg-slate-700 border-0 text-white placeholder:text-slate-400 focus:bg-slate-600 focus:ring-2 focus:ring-blue-500"
                       required
                     />
                   </div>
@@ -197,7 +197,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
                   {/* Confirm Password - Only for Sign Up */}
                   {isSignUp && (
                     <div className="space-y-2">
-                      <Label htmlFor="confirmPassword" className="text-sm font-medium text-gray-300">
+                      <Label htmlFor="confirmPassword" className="text-sm font-medium text-slate-300">
                         Confirmar senha
                       </Label>
                       <Input
@@ -206,7 +206,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
                         placeholder="Confirme sua senha"
                         value={formData.confirmPassword}
                         onChange={(e) => handleInputChange('confirmPassword', e.target.value)}
-                        className="h-12 bg-gray-700 border-0 text-white placeholder:text-gray-400 focus:bg-gray-600 focus:ring-2 focus:ring-primary"
+                        className="h-12 bg-slate-700 border-0 text-white placeholder:text-slate-400 focus:bg-slate-600 focus:ring-2 focus:ring-blue-500"
                         required={isSignUp}
                       />
                     </div>
@@ -217,7 +217,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
                     <div className="text-center">
                       <button
                         type="button"
-                        className="text-sm text-gray-400 hover:text-primary transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 rounded"
+                        className="text-sm text-slate-400 hover:text-blue-400 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-800 rounded"
                         onClick={() => toast({ title: "Ação simulada", description: "Link de recuperação enviado!" })}
                       >
                         Esqueceu sua senha?
@@ -228,7 +228,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
                   {/* Submit Button */}
                   <Button 
                     type="submit" 
-                    className="w-full h-12 bg-gradient-to-r from-red-500 to-pink-500 hover:from-red-600 hover:to-pink-600 text-white font-medium rounded-full transition-all duration-200"
+                    className="w-full h-12 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-full transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-slate-800"
                     disabled={isLoading}
                   >
                     {isLoading ? (
@@ -245,7 +245,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
             </div>
 
             {/* Right Column - Promotional Panel */}
-            <div className="flex-1 bg-gradient-auth text-white p-8 lg:p-12 flex flex-col justify-center items-center text-center lg:order-last order-first">
+            <div className="flex-1 bg-gradient-to-br from-blue-600 to-blue-800 text-white p-8 lg:p-12 flex flex-col justify-center items-center text-center lg:order-last order-first">
               <div className="max-w-sm">
                 
                 {/* Logo/Image */}
@@ -271,7 +271,7 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
                 <Button
                   type="button"
                   variant="outline"
-                  className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-red-500 px-8 py-3 rounded-full font-medium transition-all duration-200"
+                  className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-full font-medium transition-all duration-200 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-700"
                   onClick={toggleMode}
                   disabled={isLoading}
                 >
