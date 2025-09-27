@@ -47,6 +47,21 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        strategic: {
+          DEFAULT: "hsl(var(--strategic))",
+          foreground: "hsl(var(--strategic-foreground))",
+          muted: "hsl(var(--strategic-muted))",
+        },
+        tactical: {
+          DEFAULT: "hsl(var(--tactical))",
+          foreground: "hsl(var(--tactical-foreground))",
+          muted: "hsl(var(--tactical-muted))",
+        },
+        operational: {
+          DEFAULT: "hsl(var(--operational))",
+          foreground: "hsl(var(--operational-foreground))",
+          muted: "hsl(var(--operational-muted))",
+        },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",
@@ -80,10 +95,55 @@ export default {
             height: "0",
           },
         },
+        "fade-in": {
+          "0%": {
+            opacity: "0",
+            transform: "translateY(10px)"
+          },
+          "100%": {
+            opacity: "1",
+            transform: "translateY(0)"
+          }
+        },
+        "scale-in": {
+          "0%": {
+            transform: "scale(0.95)",
+            opacity: "0"
+          },
+          "100%": {
+            transform: "scale(1)",
+            opacity: "1"
+          }
+        },
+        "slide-up": {
+          "0%": {
+            transform: "translateY(20px)",
+            opacity: "0"
+          },
+          "100%": {
+            transform: "translateY(0)",
+            opacity: "1"
+          }
+        }
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "fade-in": "fade-in 0.3s ease-out",
+        "scale-in": "scale-in 0.2s ease-out",
+        "slide-up": "slide-up 0.4s ease-out",
+      },
+      backgroundImage: {
+        'gradient-strategic': 'var(--gradient-strategic)',
+        'gradient-tactical': 'var(--gradient-tactical)',
+        'gradient-operational': 'var(--gradient-operational)',
+        'gradient-hero': 'var(--gradient-hero)',
+      },
+      boxShadow: {
+        'strategic': 'var(--shadow-strategic)',
+        'tactical': 'var(--shadow-tactical)',
+        'operational': 'var(--shadow-operational)',
+        'elevated': 'var(--shadow-elevated)',
       },
     },
   },
