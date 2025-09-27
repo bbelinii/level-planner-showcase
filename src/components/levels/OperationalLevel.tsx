@@ -131,44 +131,6 @@ const OperationalLevel = ({ onPrevious }: OperationalLevelProps) => {
           </CardContent>
         </Card>
 
-        {/* Status dos Fornecedores */}
-        <Card className="shadow-lg">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Users className="h-5 w-5 text-operational" />
-              Envio da Lista para Fornecedores
-            </CardTitle>
-            <CardDescription>
-              Acompanhamento de entregas programadas
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-3">
-              {suppliersStatus.map((supplier, index) => (
-                <div key={index} className="p-3 border rounded-lg">
-                  <div className="flex items-center justify-between mb-2">
-                    <h4 className="font-medium text-sm">{supplier.supplier}</h4>
-                    <Badge variant={getStatusColor(supplier.status)}>
-                      {supplier.status}
-                    </Badge>
-                  </div>
-                  <div className="text-xs text-muted-foreground mb-2">
-                    Itens: {supplier.items.join(', ')}
-                  </div>
-                  <div className="text-xs text-muted-foreground">
-                    Previsão: {supplier.date}
-                  </div>
-                </div>
-              ))}
-            </div>
-            
-            <div className="mt-4 pt-4 border-t">
-              <Button className="w-full bg-operational text-operational-foreground hover:bg-operational/90">
-                Solicitar Atualizações
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
 
         {/* Dashboard de Acompanhamento */}
         <Card className="shadow-lg">

@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { BarChart3, TrendingUp, Package, Settings2, ArrowRight, Factory, Users } from 'lucide-react';
+import ProductList from '@/components/ProductList';
 
 interface StrategicLevelProps {
   onNext?: () => void;
@@ -47,6 +48,9 @@ const StrategicLevel = ({ onNext }: StrategicLevelProps) => {
           Análises históricas e definição de políticas de produção
         </p>
       </div>
+
+      {/* Lista de Produtos */}
+      <ProductList />
 
       <div className="grid lg:grid-cols-2 gap-8 mb-8">
         {/* Análises Históricas */}
