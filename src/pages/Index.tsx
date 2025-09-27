@@ -4,7 +4,7 @@ import TacticalLevel from '@/components/levels/TacticalLevel';
 import OperationalLevel from '@/components/levels/OperationalLevel';
 import { BarChart3, Settings, Wrench, Building2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import pcpLogo from '@/assets/pcp-logo.png';
+import pcpLogo from '@/assets/pcp-lite-logo.png';
 
 const Index = () => {
   const [currentLevel, setCurrentLevel] = useState<'home' | 'strategic' | 'tactical' | 'operational'>('home');
@@ -43,11 +43,20 @@ const Index = () => {
         {/* Simple navbar */}
         <header className="bg-background/95 backdrop-blur-md border-b border-border sticky top-0 z-50">
           <div className="container mx-auto px-4 py-4">
-            <div className="flex items-center">
-            <div className="w-10 h-10 rounded-xl flex items-center justify-center overflow-hidden">
-              <img src={pcpLogo} alt="PCP lite" className="w-full h-full object-contain" />
-            </div>
-            <span className="ml-3 text-xl font-bold text-foreground">PCP lite</span>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
+                <div className="w-10 h-10 rounded-xl flex items-center justify-center overflow-hidden">
+                  <img src={pcpLogo} alt="PCP lite" className="w-full h-full object-contain" />
+                </div>
+                <span className="ml-3 text-xl font-bold text-foreground">PCP lite</span>
+              </div>
+              <Button 
+                variant="outline" 
+                onClick={() => handleLevelNavigation('home')}
+                className="hover-scale"
+              >
+                Menu Principal
+              </Button>
             </div>
           </div>
         </header>
@@ -76,10 +85,10 @@ const Index = () => {
       <header className="bg-background/95 backdrop-blur-md border-b border-border sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center">
-          <div className="w-10 h-10 rounded-xl flex items-center justify-center overflow-hidden">
-            <img src={pcpLogo} alt="PCP lite" className="w-full h-full object-contain" />
-          </div>
-          <span className="ml-3 text-xl font-bold text-foreground">PCP lite</span>
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center overflow-hidden">
+              <img src={pcpLogo} alt="PCP lite" className="w-full h-full object-contain" />
+            </div>
+            <span className="ml-3 text-xl font-bold text-foreground">PCP lite</span>
           </div>
         </div>
       </header>
@@ -89,8 +98,8 @@ const Index = () => {
         {/* Company Logo and Motto */}
         <div className="text-center mb-16">
           <div className="mb-8">
-            <div className="w-32 h-32 bg-gradient-to-br from-primary/20 to-accent/20 rounded-3xl flex items-center justify-center mx-auto mb-6">
-              <Building2 className="h-16 w-16 text-primary" />
+            <div className="w-32 h-32 bg-gradient-to-br from-primary/10 to-accent/10 rounded-3xl flex items-center justify-center mx-auto mb-6 p-4">
+              <img src={pcpLogo} alt="PCP lite" className="w-full h-full object-contain" />
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
               Empresa Modelo
