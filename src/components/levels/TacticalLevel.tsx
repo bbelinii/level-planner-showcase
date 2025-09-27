@@ -2,9 +2,7 @@ import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
-import { Settings, ArrowRight, ArrowLeft, Package, Users, Clock, CheckCircle, AlertTriangle, Calculator, Truck, Wrench } from 'lucide-react';
-import { mockBOM, mockSKUs } from '@/data/mockData';
+import { Settings, ArrowRight, ArrowLeft, Package, Users, Clock, CheckCircle, AlertTriangle } from 'lucide-react';
 
 interface TacticalLevelProps {
   onNext?: () => void;
@@ -14,64 +12,18 @@ interface TacticalLevelProps {
 const TacticalLevel = ({ onNext, onPrevious }: TacticalLevelProps) => {
   const [selectedSKU, setSelectedSKU] = useState('SKU001');
 
-  // Explosão de materiais - necessidades brutas → líquidas → data de necessidade
-  const materialExplosion = [
-    { 
-      component: 'Barra de Aço Ø6mm', 
-      grossNeed: 1000, 
-      onHand: 250, 
-      netNeed: 750, 
-      lotSize: 500,
-      finalOrder: 1000,
-      needDate: '02/10/2024',
-      orderDate: '27/09/2024',
-      leadTime: 5,
-      supplier: 'Aços Brasil',
-      lotRule: 'EOQ'
-    },
-    { 
-      component: 'Barra Sextavada M6', 
-      grossNeed: 750, 
-      onHand: 150, 
-      netNeed: 600, 
-      lotSize: 100,
-      finalOrder: 600,
-      needDate: '03/10/2024',
-      orderDate: '30/09/2024',
-      leadTime: 3,
-      supplier: 'MetalCorp',
-      lotRule: 'minimum'
-    }
+  const bomData = [
+    { item: 'Matéria-prima A', quantity: 2.5, unit: 'kg', supplier: 'Fornecedor Alpha' },
+    { item: 'Componente B', quantity: 1, unit: 'un', supplier: 'Fornecedor Beta' },
+    { item: 'Parafuso M6', quantity: 4, unit: 'un', supplier: 'Fornecedor Gamma' },
+    { item: 'Tinta especial', quantity: 0.5, unit: 'L', supplier: 'Fornecedor Delta' }
   ];
 
   const suppliersData = [
-    { 
-      supplier: 'Aços Brasil', 
-      status: 'confirmado', 
-      items: 2, 
-      lastSent: '25/09/2024',
-      leadTime: 5,
-      expectedDate: '02/10/2024',
-      reliability: 'Alta'
-    },
-    { 
-      supplier: 'MetalCorp', 
-      status: 'pendente', 
-      items: 1, 
-      lastSent: '24/09/2024',
-      leadTime: 3,
-      expectedDate: '27/09/2024',
-      reliability: 'Média'
-    },
-    { 
-      supplier: 'SiderSteel', 
-      status: 'enviado', 
-      items: 3, 
-      lastSent: '25/09/2024',
-      leadTime: 7,
-      expectedDate: '04/10/2024',
-      reliability: 'Alta'
-    }
+    { supplier: 'Fornecedor Alpha', status: 'enviado', items: 3, lastSent: '25/09/2024' },
+    { supplier: 'Fornecedor Beta', status: 'pendente', items: 1, lastSent: '24/09/2024' },
+    { supplier: 'Fornecedor Gamma', status: 'confirmado', items: 2, lastSent: '25/09/2024' },
+    { supplier: 'Fornecedor Delta', status: 'enviado', items: 1, lastSent: '25/09/2024' }
   ];
 
   const demandForecast = [
@@ -80,50 +32,20 @@ const TacticalLevel = ({ onNext, onPrevious }: TacticalLevelProps) => {
     { sku: 'SKU003', week1: 600, week2: 650, week3: 580, week4: 720 }
   ];
 
-  // Liberação de lotes com duração e setup por máquina
   const productionLots = [
-    { 
-      id: 'L001', 
-      sku: 'SKU001', 
-      quantity: 500, 
-      machine: 'Torno CNC Alpha', 
-      status: 'liberado', 
-      priority: 'alta',
-      duration: 240, // minutos
-      setupTime: 45,
-      estimatedStart: '08:00',
-      estimatedEnd: '12:45'
-    },
-    { 
-      id: 'L002', 
-      sku: 'SKU002', 
-      quantity: 300, 
-      machine: 'Fresa Universal Beta', 
-      status: 'pendente', 
-      priority: 'média',
-      duration: 180,
-      setupTime: 30,
-      estimatedStart: '13:00',
-      estimatedEnd: '16:30'
-    },
-    { 
-      id: 'L003', 
-      sku: 'SKU001', 
-      quantity: 400, 
-      machine: 'Torno CNC Alpha', 
-      status: 'planejado', 
-      priority: 'alta',
-      duration: 200,
-      setupTime: 15, // setup reduzido por ser mesmo produto
-      estimatedStart: '13:00',
-      estimatedEnd: '16:35'
-    }
+    { id: 'L001', sku: 'SKU001', quantity: 500, machine: 'Máquina 1', status: 'liberado', priority: 'alta' },
+    { id: 'L002', sku: 'SKU002', quantity: 300, machine: 'Máquina 2', status: 'pendente', priority: 'média' },
+    { id: 'L003', sku: 'SKU001', quantity: 400, machine: 'Máquina 1', status: 'liberado', priority: 'alta' },
+    { id: 'L004', sku: 'SKU003', quantity: 250, machine: 'Máquina 3', status: 'planejado', priority: 'baixa' }
   ];
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case 'enviado': case 'confirmado': case 'liberado': return 'default';
-      case 'pendente': case 'planejado': return 'secondary';
+      case 'enviado': return 'default';
+      case 'confirmado': return 'default';
+      case 'pendente': return 'secondary';
+      case 'liberado': return 'default';
+      case 'planejado': return 'outline';
       default: return 'outline';
     }
   };
@@ -137,15 +59,6 @@ const TacticalLevel = ({ onNext, onPrevious }: TacticalLevelProps) => {
     }
   };
 
-  const getReliabilityColor = (reliability: string) => {
-    switch (reliability) {
-      case 'Alta': return 'default';
-      case 'Média': return 'secondary';
-      case 'Baixa': return 'destructive';
-      default: return 'outline';
-    }
-  };
-
   return (
     <div className="py-8">
       <div className="text-center mb-8">
@@ -154,70 +67,73 @@ const TacticalLevel = ({ onNext, onPrevious }: TacticalLevelProps) => {
           Nível Tático
         </div>
         <h2 className="text-3xl md:text-4xl font-bold mb-4">
-          Controle Tático Aprimorado
+          Controle Tático
         </h2>
         <p className="text-muted-foreground max-w-2xl mx-auto">
-          Explosão de materiais, gestão de fornecedores e planejamento detalhado
+          Gestão de materiais e planejamento detalhado de produção
         </p>
       </div>
 
       <div className="grid lg:grid-cols-2 gap-8 mb-8">
-        {/* Explosão de Materiais */}
-        <Card className="shadow-lg lg:col-span-2">
+        {/* BOM - Lista de Materiais */}
+        <Card className="shadow-lg">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Calculator className="h-5 w-5 text-tactical" />
-              Explosão de Materiais (MRP)
+              <Package className="h-5 w-5 text-tactical" />
+              BOM - Lista de Materiais
             </CardTitle>
             <CardDescription>
-              Necessidades brutas → líquidas → data de necessidade
+              Estrutura de materiais para produção
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="overflow-x-auto">
-              <table className="w-full text-sm">
-                <thead>
-                  <tr className="border-b">
-                    <th className="text-left p-2">Componente</th>
-                    <th className="text-right p-2">Nec. Bruta</th>
-                    <th className="text-right p-2">Estoque</th>
-                    <th className="text-right p-2">Nec. Líquida</th>
-                    <th className="text-right p-2">Lote Final</th>
-                    <th className="text-left p-2">Regra</th>
-                    <th className="text-center p-2">Data Pedido</th>
-                    <th className="text-center p-2">Data Necessidade</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {materialExplosion.map((item, index) => (
-                    <tr key={index} className="border-b hover:bg-muted/50">
-                      <td className="p-2 font-medium">{item.component}</td>
-                      <td className="p-2 text-right">{item.grossNeed}</td>
-                      <td className="p-2 text-right text-muted-foreground">{item.onHand}</td>
-                      <td className="p-2 text-right font-medium">{item.netNeed}</td>
-                      <td className="p-2 text-right font-bold text-strategic">{item.finalOrder}</td>
-                      <td className="p-2">
-                        <Badge variant="outline" className="text-xs">{item.lotRule}</Badge>
-                      </td>
-                      <td className="p-2 text-center text-sm">{item.orderDate}</td>
-                      <td className="p-2 text-center text-sm font-medium">{item.needDate}</td>
+            <div className="space-y-4">
+              <div>
+                <label className="text-sm font-medium mb-2 block">SKU Selecionado</label>
+                <select 
+                  value={selectedSKU}
+                  onChange={(e) => setSelectedSKU(e.target.value)}
+                  className="w-full p-2 border rounded"
+                >
+                  <option value="SKU001">SKU001 - Produto A</option>
+                  <option value="SKU002">SKU002 - Produto B</option>
+                  <option value="SKU003">SKU003 - Produto C</option>
+                </select>
+              </div>
+
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b">
+                      <th className="text-left p-2">Item</th>
+                      <th className="text-right p-2">Qtd</th>
+                      <th className="text-left p-2">Fornecedor</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {bomData.map((item, index) => (
+                      <tr key={index} className="border-b hover:bg-muted/50">
+                        <td className="p-2">{item.item}</td>
+                        <td className="p-2 text-right">{item.quantity} {item.unit}</td>
+                        <td className="p-2 text-sm text-muted-foreground">{item.supplier}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </CardContent>
         </Card>
 
-        {/* Fornecedores com Lead Time */}
+        {/* Envio para Fornecedores */}
         <Card className="shadow-lg">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Truck className="h-5 w-5 text-tactical" />
-              Fornecedores - Lead Time e Confiabilidade
+              <Users className="h-5 w-5 text-tactical" />
+              Envio da Lista para Fornecedores
             </CardTitle>
             <CardDescription>
-              Status detalhado com prazos e datas previstas
+              Status do envio de solicitações de materiais
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -226,28 +142,13 @@ const TacticalLevel = ({ onNext, onPrevious }: TacticalLevelProps) => {
                 <div key={index} className="p-3 border rounded-lg">
                   <div className="flex items-center justify-between mb-2">
                     <h4 className="font-medium text-sm">{supplier.supplier}</h4>
-                    <div className="flex gap-2">
-                      <Badge variant={getStatusColor(supplier.status)}>
-                        {supplier.status}
-                      </Badge>
-                      <Badge variant={getReliabilityColor(supplier.reliability)}>
-                        {supplier.reliability}
-                      </Badge>
-                    </div>
+                    <Badge variant={getStatusColor(supplier.status)}>
+                      {supplier.status}
+                    </Badge>
                   </div>
-                  <div className="grid grid-cols-2 gap-4 text-xs text-muted-foreground">
-                    <div>
-                      <span className="font-medium">Lead Time:</span> {supplier.leadTime} dias
-                    </div>
-                    <div>
-                      <span className="font-medium">Data Prevista:</span> {supplier.expectedDate}
-                    </div>
-                    <div>
-                      <span className="font-medium">Itens:</span> {supplier.items} solicitados
-                    </div>
-                    <div>
-                      <span className="font-medium">Último Envio:</span> {supplier.lastSent}
-                    </div>
+                  <div className="flex justify-between text-xs text-muted-foreground">
+                    <span>{supplier.items} itens solicitados</span>
+                    <span>Último envio: {supplier.lastSent}</span>
                   </div>
                 </div>
               ))}
@@ -255,7 +156,7 @@ const TacticalLevel = ({ onNext, onPrevious }: TacticalLevelProps) => {
             
             <div className="mt-4 pt-4 border-t">
               <Button className="w-full bg-tactical text-tactical-foreground hover:bg-tactical/90">
-                Atualizar Status dos Fornecedores
+                Reenviar Solicitações Pendentes
               </Button>
             </div>
           </CardContent>
@@ -306,22 +207,22 @@ const TacticalLevel = ({ onNext, onPrevious }: TacticalLevelProps) => {
           </CardContent>
         </Card>
 
-        {/* Liberação de Lotes Aprimorada */}
-        <Card className="shadow-lg lg:col-span-2">
+        {/* Liberação de Lotes */}
+        <Card className="shadow-lg">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
-              <Wrench className="h-5 w-5 text-tactical" />
-              Liberação de Lotes - Duração e Setup
+              <CheckCircle className="h-5 w-5 text-tactical" />
+              Liberação de Lotes para Máquinas
             </CardTitle>
             <CardDescription>
-              Ordens com tempo de produção e setup previsto por máquina
+              Ordens de produção liberadas e programadas
             </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-3">
               {productionLots.map((lot, index) => (
-                <div key={index} className="p-4 border rounded-lg">
-                  <div className="flex items-center justify-between mb-3">
+                <div key={index} className="p-3 border rounded-lg">
+                  <div className="flex items-center justify-between mb-2">
                     <div>
                       <h4 className="font-medium text-sm">{lot.id}</h4>
                       <p className="text-xs text-muted-foreground">{lot.sku} • {lot.quantity} unidades</p>
@@ -335,32 +236,8 @@ const TacticalLevel = ({ onNext, onPrevious }: TacticalLevelProps) => {
                       </Badge>
                     </div>
                   </div>
-                  
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs">
-                    <div>
-                      <span className="font-medium text-muted-foreground">Máquina:</span>
-                      <div className="font-medium">{lot.machine}</div>
-                    </div>
-                    <div>
-                      <span className="font-medium text-muted-foreground">Setup:</span>
-                      <div className="font-medium">{lot.setupTime} min</div>
-                    </div>
-                    <div>
-                      <span className="font-medium text-muted-foreground">Duração:</span>
-                      <div className="font-medium">{lot.duration} min</div>
-                    </div>
-                    <div>
-                      <span className="font-medium text-muted-foreground">Período:</span>
-                      <div className="font-medium">{lot.estimatedStart} - {lot.estimatedEnd}</div>
-                    </div>
-                  </div>
-                  
-                  <div className="mt-3">
-                    <div className="flex justify-between text-xs text-muted-foreground mb-1">
-                      <span>Progresso Estimado</span>
-                      <span>{lot.status === 'liberado' ? '100%' : lot.status === 'pendente' ? '0%' : '50%'}</span>
-                    </div>
-                    <Progress value={lot.status === 'liberado' ? 100 : lot.status === 'pendente' ? 0 : 50} className="h-2" />
+                  <div className="text-xs text-muted-foreground">
+                    Máquina: {lot.machine}
                   </div>
                 </div>
               ))}
@@ -369,10 +246,10 @@ const TacticalLevel = ({ onNext, onPrevious }: TacticalLevelProps) => {
             <div className="mt-4 pt-4 border-t">
               <div className="flex gap-2">
                 <Button variant="outline" className="flex-1">
-                  Otimizar Sequenciamento
+                  Programar Lotes
                 </Button>
                 <Button className="flex-1 bg-tactical text-tactical-foreground hover:bg-tactical/90">
-                  Liberar Todos os Lotes
+                  Liberar Produção
                 </Button>
               </div>
             </div>
