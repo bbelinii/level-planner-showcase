@@ -194,5 +194,54 @@ export const glossaryTerms = [
     fullName: 'Key Performance Indicator',
     definition: 'Métricas quantificáveis que avaliam o desempenho de processos críticos e apoiam a tomada de decisão estratégica.',
     examples: ['OEE: 85%', 'Giro de estoque: 12x/ano']
+  },
+  {
+    id: 'oee',
+    term: 'OEE',
+    fullName: 'Overall Equipment Effectiveness',
+    definition: 'Indicador que mede a eficiência global dos equipamentos, considerando disponibilidade, performance e qualidade.',
+    examples: ['Disponibilidade: 90%', 'Performance: 85%', 'Qualidade: 98%']
+  },
+  {
+    id: 'wip',
+    term: 'WIP',
+    fullName: 'Work in Process',
+    definition: 'Material em processo de produção, entre o estoque de matéria-prima e o produto acabado.',
+    examples: ['Peças na linha de montagem', 'Lotes aguardando próxima operação']
+  },
+  {
+    id: 'mrp',
+    term: 'MRP',
+    fullName: 'Material Requirements Planning',
+    definition: 'Sistema que calcula as necessidades de materiais baseado no plano de produção e estrutura dos produtos.',
+    examples: ['Explosão do BOM', 'Cálculo de necessidades líquidas']
+  },
+  {
+    id: 'jit',
+    term: 'JIT',
+    fullName: 'Just in Time',
+    definition: 'Filosofia de produção que visa produzir apenas o necessário, na quantidade necessária, no momento necessário.',
+    examples: ['Produção puxada', 'Redução de estoques', 'Eliminação de desperdícios']
+  },
+  {
+    id: 'kanban',
+    term: 'KANBAN',
+    fullName: 'Sistema Visual de Controle',
+    definition: 'Sistema visual de sinalização que controla o fluxo de produção baseado na demanda real.',
+    examples: ['Cartões de sinalização', 'Quadros visuais', 'Controle de fluxo']
+  },
+  {
+    id: 'leadtime',
+    term: 'LEAD TIME',
+    fullName: 'Tempo de Atravessamento',
+    definition: 'Tempo total necessário desde o início até a conclusão de um processo ou pedido.',
+    examples: ['Lead time de produção: 5 dias', 'Lead time de fornecedor: 15 dias']
+  },
+  {
+    id: 'setup',
+    term: 'SETUP',
+    fullName: 'Tempo de Preparação',
+    definition: 'Tempo necessário para preparar uma máquina ou processo para a produção de um novo produto ou lote.',
+    examples: ['Setup de máquina: 30 min', 'Troca de ferramental']
   }
 ];
