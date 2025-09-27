@@ -62,66 +62,108 @@ export interface ProductionOrder {
 
 // Dados mockados
 export const mockSKUs: SKU[] = [
-  { id: 'SKU001', name: 'Parafuso M6x20', description: 'Parafuso sextavado M6 x 20mm', price: 0.15, leadTime: 3, category: 'Fixação' },
-  { id: 'SKU002', name: 'Porca M6', description: 'Porca sextavada M6', price: 0.08, leadTime: 2, category: 'Fixação' },
-  { id: 'SKU003', name: 'Arruela Lisa M6', description: 'Arruela lisa 6mm', price: 0.03, leadTime: 1, category: 'Fixação' },
-  { id: 'SKU004', name: 'Chapa Aço 200x100', description: 'Chapa de aço carbono 200x100x3mm', price: 12.50, leadTime: 7, category: 'Matéria-prima' },
-  { id: 'SKU005', name: 'Tubo Ø25mm', description: 'Tubo redondo Ø25mm parede 2mm', price: 8.75, leadTime: 5, category: 'Matéria-prima' },
-  { id: 'SKU006', name: 'Motor 1HP', description: 'Motor elétrico 1HP 1750rpm', price: 450.00, leadTime: 14, category: 'Componente' },
-  { id: 'SKU007', name: 'Redutor 1:20', description: 'Redutor de velocidade 1:20', price: 320.00, leadTime: 10, category: 'Componente' },
-  { id: 'SKU008', name: 'Mancal SKF', description: 'Mancal rolamento SKF 6206', price: 85.00, leadTime: 8, category: 'Componente' },
-  { id: 'SKU009', name: 'Correia V', description: 'Correia em V seção A42', price: 25.00, leadTime: 4, category: 'Componente' },
-  { id: 'SKU010', name: 'Suporte Base', description: 'Suporte de base soldado', price: 180.00, leadTime: 12, category: 'Subconjunto' }
+  // Produtos Acabados
+  { id: 'CELL001', name: 'Celular Galaxy X1', description: 'Smartphone Android 6.5" 128GB 5G', price: 1899.90, leadTime: 15, category: 'Produto Acabado' },
+  { id: 'DRONE001', name: 'Drone Pro FPV', description: 'Drone com câmera 4K e gimbal 3 eixos', price: 2499.90, leadTime: 20, category: 'Produto Acabado' },
+  { id: 'MON001', name: 'Monitor 4K Gaming', description: 'Monitor LED 27" 4K 144Hz HDR', price: 1299.90, leadTime: 12, category: 'Produto Acabado' },
+  
+  // Componentes Eletrônicos
+  { id: 'PCB001', name: 'Placa-mãe Celular', description: 'PCB principal com processador Snapdragon', price: 285.50, leadTime: 21, category: 'Eletrônico' },
+  { id: 'PCB002', name: 'Controlador de Voo', description: 'Flight controller com giroscópio 6 eixos', price: 120.00, leadTime: 14, category: 'Eletrônico' },
+  { id: 'PCB003', name: 'Placa de Vídeo Monitor', description: 'GPU integrada para processamento 4K', price: 180.75, leadTime: 18, category: 'Eletrônico' },
+  { id: 'BAT001', name: 'Bateria Li-ion 4000mAh', description: 'Bateria recarregável para celular', price: 85.00, leadTime: 10, category: 'Energia' },
+  { id: 'BAT002', name: 'Bateria Drone 5200mAh', description: 'Bateria LiPo 3S para drone', price: 145.00, leadTime: 8, category: 'Energia' },
+  { id: 'LCD001', name: 'Tela OLED 6.5"', description: 'Display OLED Full HD+ touch', price: 195.00, leadTime: 16, category: 'Display' },
+  { id: 'LCD002', name: 'Painel LED 27"', description: 'Painel IPS 4K com backlight LED', price: 420.00, leadTime: 22, category: 'Display' },
+  { id: 'CAM001', name: 'Câmera 64MP', description: 'Sensor CMOS principal do celular', price: 75.50, leadTime: 12, category: 'Óptico' },
+  { id: 'CAM002', name: 'Câmera Drone 4K', description: 'Câmera estabilizada com gimbal', price: 350.00, leadTime: 25, category: 'Óptico' },
+  { id: 'MOT001', name: 'Motor Brushless', description: 'Motor BLDC 2300KV para drone', price: 45.00, leadTime: 7, category: 'Mecânico' },
+  { id: 'CASE001', name: 'Carcaça Celular', description: 'Frame de alumínio anodizado', price: 35.00, leadTime: 9, category: 'Estrutural' },
+  { id: 'CASE002', name: 'Frame Drone Carbon', description: 'Chassi em fibra de carbono', price: 95.00, leadTime: 14, category: 'Estrutural' },
+  { id: 'CASE003', name: 'Gabinete Monitor', description: 'Carcaça plástica ABS preta', price: 28.00, leadTime: 6, category: 'Estrutural' },
+  
+  // Componentes de Embalagem
+  { id: 'PKG001', name: 'Caixa Celular Premium', description: 'Embalagem cartonada com espuma', price: 12.50, leadTime: 5, category: 'Embalagem' },
+  { id: 'PKG002', name: 'Case Drone Rígido', description: 'Maleta rígida para transporte', price: 89.90, leadTime: 8, category: 'Embalagem' },
+  { id: 'PKG003', name: 'Caixa Monitor Eco', description: 'Embalagem sustentável papelão', price: 15.75, leadTime: 3, category: 'Embalagem' },
+  
+  // Cabos e Acessórios
+  { id: 'CAB001', name: 'Cabo USB-C', description: 'Cabo de carregamento e dados USB-C', price: 18.00, leadTime: 4, category: 'Acessório' },
+  { id: 'CAB002', name: 'Cabo HDMI 2.1', description: 'Cabo HDMI 4K 60Hz para monitor', price: 25.00, leadTime: 6, category: 'Acessório' },
+  { id: 'PROP001', name: 'Hélices Drone', description: 'Set 4 hélices em fibra de carbono', price: 32.00, leadTime: 5, category: 'Acessório' }
 ];
 
 export const mockMachines: Machine[] = [
-  { id: 'MAC001', name: 'Torno CNC Alpha', capacity: 100, status: 'available', efficiency: 0.85 },
-  { id: 'MAC002', name: 'Fresa Universal Beta', capacity: 80, status: 'busy', currentJob: 'OP-2024-001', efficiency: 0.92 },
-  { id: 'MAC003', name: 'Solda MIG Delta', capacity: 120, status: 'available', efficiency: 0.78 },
-  { id: 'MAC004', name: 'Prensa 50T Gamma', capacity: 200, status: 'maintenance', efficiency: 0.88 },
-  { id: 'MAC005', name: 'Furadeira Radial Epsilon', capacity: 60, status: 'available', efficiency: 0.95 }
+  { id: 'SMT001', name: 'Linha SMT Panasonic', capacity: 120, status: 'available', efficiency: 0.92 },
+  { id: 'SMT002', name: 'Pick & Place Yamaha', capacity: 150, status: 'busy', currentJob: 'OP-2024-001', efficiency: 0.88 },
+  { id: 'ASM001', name: 'Mesa Montagem Final', capacity: 80, status: 'available', efficiency: 0.85 },
+  { id: 'TEST001', name: 'Estação Teste ICT', capacity: 60, status: 'available', efficiency: 0.95 },
+  { id: 'PKG001', name: 'Linha Embalagem Auto', capacity: 100, status: 'maintenance', efficiency: 0.90 },
+  { id: 'WELD001', name: 'Soldadora Ultrassônica', capacity: 200, status: 'available', efficiency: 0.87 }
 ];
 
 export const mockBOM: BOMItem[] = [
-  { skuId: 'SKU001', componentId: 'RAW001', componentName: 'Barra de Aço Ø6mm', quantity: 0.02, cost: 0.05 },
-  { skuId: 'SKU002', componentId: 'RAW002', componentName: 'Barra Sextavada M6', quantity: 0.015, cost: 0.04 },
-  { skuId: 'SKU003', componentId: 'RAW003', componentName: 'Chapa Aço 1mm', quantity: 0.001, cost: 0.015 },
-  { skuId: 'SKU004', componentId: 'RAW004', componentName: 'Chapa Aço Laminada', quantity: 1, cost: 8.50 },
-  { skuId: 'SKU005', componentId: 'RAW005', componentName: 'Tubo Trefilado Ø25', quantity: 1, cost: 6.20 }
+  // BOM Celular Galaxy X1
+  { skuId: 'CELL001', componentId: 'PCB001', componentName: 'Placa-mãe Celular', quantity: 1, cost: 285.50 },
+  { skuId: 'CELL001', componentId: 'BAT001', componentName: 'Bateria Li-ion 4000mAh', quantity: 1, cost: 85.00 },
+  { skuId: 'CELL001', componentId: 'LCD001', componentName: 'Tela OLED 6.5"', quantity: 1, cost: 195.00 },
+  { skuId: 'CELL001', componentId: 'CAM001', componentName: 'Câmera 64MP', quantity: 1, cost: 75.50 },
+  { skuId: 'CELL001', componentId: 'CASE001', componentName: 'Carcaça Celular', quantity: 1, cost: 35.00 },
+  { skuId: 'CELL001', componentId: 'PKG001', componentName: 'Caixa Celular Premium', quantity: 1, cost: 12.50 },
+  { skuId: 'CELL001', componentId: 'CAB001', componentName: 'Cabo USB-C', quantity: 1, cost: 18.00 },
+  
+  // BOM Drone Pro FPV
+  { skuId: 'DRONE001', componentId: 'PCB002', componentName: 'Controlador de Voo', quantity: 1, cost: 120.00 },
+  { skuId: 'DRONE001', componentId: 'BAT002', componentName: 'Bateria Drone 5200mAh', quantity: 1, cost: 145.00 },
+  { skuId: 'DRONE001', componentId: 'CAM002', componentName: 'Câmera Drone 4K', quantity: 1, cost: 350.00 },
+  { skuId: 'DRONE001', componentId: 'MOT001', componentName: 'Motor Brushless', quantity: 4, cost: 45.00 },
+  { skuId: 'DRONE001', componentId: 'CASE002', componentName: 'Frame Drone Carbon', quantity: 1, cost: 95.00 },
+  { skuId: 'DRONE001', componentId: 'PROP001', componentName: 'Hélices Drone', quantity: 1, cost: 32.00 },
+  { skuId: 'DRONE001', componentId: 'PKG002', componentName: 'Case Drone Rígido', quantity: 1, cost: 89.90 },
+  
+  // BOM Monitor 4K Gaming
+  { skuId: 'MON001', componentId: 'PCB003', componentName: 'Placa de Vídeo Monitor', quantity: 1, cost: 180.75 },
+  { skuId: 'MON001', componentId: 'LCD002', componentName: 'Painel LED 27"', quantity: 1, cost: 420.00 },
+  { skuId: 'MON001', componentId: 'CASE003', componentName: 'Gabinete Monitor', quantity: 1, cost: 28.00 },
+  { skuId: 'MON001', componentId: 'PKG003', componentName: 'Caixa Monitor Eco', quantity: 1, cost: 15.75 },
+  { skuId: 'MON001', componentId: 'CAB002', componentName: 'Cabo HDMI 2.1', quantity: 1, cost: 25.00 }
 ];
 
 export const mockPMP: PMPItem[] = [
-  { period: 'S01/2024', demand: 1200, production: 1300, inventory: 450 },
-  { period: 'S02/2024', demand: 1350, production: 1400, inventory: 500 },
-  { period: 'S03/2024', demand: 1180, production: 1200, inventory: 520 },
-  { period: 'S04/2024', demand: 1420, production: 1500, inventory: 600 },
-  { period: 'S05/2024', demand: 1380, production: 1400, inventory: 620 },
-  { period: 'S06/2024', demand: 1250, production: 1300, inventory: 670 }
+  { period: 'S40/2024', demand: 2800, production: 2950, inventory: 890 },
+  { period: 'S41/2024', demand: 3200, production: 3300, inventory: 990 },
+  { period: 'S42/2024', demand: 2950, production: 3100, inventory: 1140 },
+  { period: 'S43/2024', demand: 4200, production: 4350, inventory: 1290 },
+  { period: 'S44/2024', demand: 3800, production: 3900, inventory: 1390 },
+  { period: 'S45/2024', demand: 3400, production: 3500, inventory: 1490 }
 ];
 
 export const mockMPS: MPSItem[] = [
-  { skuId: 'SKU001', period: 'S01/2024', plannedProduction: 500, actualProduction: 485, status: 'completed' },
-  { skuId: 'SKU002', period: 'S01/2024', plannedProduction: 400, actualProduction: 410, status: 'completed' },
-  { skuId: 'SKU003', period: 'S01/2024', plannedProduction: 300, actualProduction: 295, status: 'completed' },
-  { skuId: 'SKU001', period: 'S02/2024', plannedProduction: 550, actualProduction: 520, status: 'in-progress' },
-  { skuId: 'SKU002', period: 'S02/2024', plannedProduction: 450, actualProduction: 0, status: 'planned' },
-  { skuId: 'SKU004', period: 'S02/2024', plannedProduction: 200, actualProduction: 0, status: 'planned' }
+  { skuId: 'CELL001', period: 'S40/2024', plannedProduction: 1200, actualProduction: 1185, status: 'completed' },
+  { skuId: 'DRONE001', period: 'S40/2024', plannedProduction: 800, actualProduction: 795, status: 'completed' },
+  { skuId: 'MON001', period: 'S40/2024', plannedProduction: 950, actualProduction: 970, status: 'completed' },
+  { skuId: 'CELL001', period: 'S41/2024', plannedProduction: 1350, actualProduction: 1320, status: 'in-progress' },
+  { skuId: 'DRONE001', period: 'S41/2024', plannedProduction: 900, actualProduction: 450, status: 'in-progress' },
+  { skuId: 'MON001', period: 'S41/2024', plannedProduction: 1050, actualProduction: 0, status: 'planned' }
 ];
 
 export const mockStock: StockItem[] = [
-  { id: 'STK001', name: 'Parafuso M6x20', currentStock: 2500, minStock: 1000, maxStock: 5000, weeksCoverage: 2.1, status: 'normal' },
-  { id: 'STK002', name: 'Porca M6', currentStock: 800, minStock: 1200, maxStock: 4000, weeksCoverage: 0.6, status: 'critical' },
-  { id: 'STK003', name: 'Arruela Lisa M6', currentStock: 1500, minStock: 800, maxStock: 3000, weeksCoverage: 3.8, status: 'normal' },
-  { id: 'STK004', name: 'Chapa Aço 200x100', currentStock: 150, minStock: 100, maxStock: 300, weeksCoverage: 1.2, status: 'low' },
-  { id: 'STK005', name: 'Motor 1HP', currentStock: 25, minStock: 10, maxStock: 50, weeksCoverage: 5.2, status: 'normal' }
+  { id: 'STK001', name: 'Placa-mãe Celular', currentStock: 850, minStock: 500, maxStock: 1500, weeksCoverage: 2.8, status: 'normal' },
+  { id: 'STK002', name: 'Bateria Li-ion 4000mAh', currentStock: 320, minStock: 400, maxStock: 1200, weeksCoverage: 1.2, status: 'critical' },
+  { id: 'STK003', name: 'Tela OLED 6.5"', currentStock: 680, minStock: 300, maxStock: 1000, weeksCoverage: 3.1, status: 'normal' },
+  { id: 'STK004', name: 'Controlador de Voo', currentStock: 190, minStock: 200, maxStock: 600, weeksCoverage: 1.8, status: 'low' },
+  { id: 'STK005', name: 'Motor Brushless', currentStock: 1280, minStock: 800, maxStock: 2400, weeksCoverage: 4.2, status: 'normal' },
+  { id: 'STK006', name: 'Painel LED 27"', currentStock: 420, minStock: 250, maxStock: 800, weeksCoverage: 2.9, status: 'normal' },
+  { id: 'STK007', name: 'Câmera Drone 4K', currentStock: 95, minStock: 150, maxStock: 500, weeksCoverage: 0.8, status: 'critical' },
+  { id: 'STK008', name: 'Carcaça Celular', currentStock: 750, minStock: 400, maxStock: 1200, weeksCoverage: 3.5, status: 'normal' }
 ];
 
 export const mockProductionOrders: ProductionOrder[] = [
-  { id: 'OP001', skuId: 'SKU001', machineId: 'MAC001', quantity: 500, startTime: '08:00', endTime: '12:00', status: 'in-progress', priority: 'high' },
-  { id: 'OP002', skuId: 'SKU002', machineId: 'MAC002', quantity: 300, startTime: '13:00', endTime: '16:00', status: 'pending', priority: 'medium' },
-  { id: 'OP003', skuId: 'SKU003', machineId: 'MAC003', quantity: 200, startTime: '08:00', endTime: '10:00', status: 'completed', priority: 'low' },
-  { id: 'OP004', skuId: 'SKU004', machineId: 'MAC001', quantity: 100, startTime: '14:00', endTime: '17:00', status: 'pending', priority: 'high' },
-  { id: 'OP005', skuId: 'SKU005', machineId: 'MAC005', quantity: 150, startTime: '09:00', endTime: '11:30', status: 'in-progress', priority: 'medium' }
+  { id: 'OP001', skuId: 'CELL001', machineId: 'SMT001', quantity: 450, startTime: '08:00', endTime: '12:00', status: 'in-progress', priority: 'high' },
+  { id: 'OP002', skuId: 'DRONE001', machineId: 'ASM001', quantity: 200, startTime: '13:00', endTime: '16:00', status: 'pending', priority: 'medium' },
+  { id: 'OP003', skuId: 'MON001', machineId: 'SMT002', quantity: 180, startTime: '08:00', endTime: '14:00', status: 'completed', priority: 'low' },
+  { id: 'OP004', skuId: 'CELL001', machineId: 'TEST001', quantity: 350, startTime: '14:00', endTime: '17:00', status: 'pending', priority: 'high' },
+  { id: 'OP005', skuId: 'DRONE001', machineId: 'WELD001', quantity: 120, startTime: '09:00', endTime: '11:30', status: 'in-progress', priority: 'medium' }
 ];
 
 // Dados para cálculo EOQ/MC
@@ -151,35 +193,35 @@ export const glossaryTerms = [
     term: 'PMP',
     fullName: 'Plano Mestre de Produção',
     definition: 'Documento que especifica o que deve ser produzido, quando e em que quantidade, considerando a demanda prevista e a capacidade disponível.',
-    examples: ['Planejamento semanal de 1.200 unidades', 'Definição de mix de produtos por período']
+    examples: ['Planejamento semanal de 3.200 celulares', 'Mix: 40% Celular, 30% Drone, 30% Monitor']
   },
   {
     id: 'mps',
     term: 'MPS',
     fullName: 'Master Production Schedule',
     definition: 'Cronograma detalhado que converte o PMP em ordens específicas de produção por SKU, máquina e período.',
-    examples: ['500 parafusos M6 na semana 1', 'Programação por máquina e turno']
+    examples: ['1.350 Celulares Galaxy X1 na S41', 'Linha SMT: 450 unidades/dia']
   },
   {
     id: 'sku',
     term: 'SKU',
     fullName: 'Stock Keeping Unit',
     definition: 'Unidade de manutenção de estoque que identifica cada produto único no sistema, incluindo variações de tamanho, cor, modelo.',
-    examples: ['SKU001: Parafuso M6x20', 'SKU002: Porca M6']
+    examples: ['CELL001: Celular Galaxy X1', 'DRONE001: Drone Pro FPV']
   },
   {
     id: 'bom',
     term: 'BOM',
     fullName: 'Bill of Materials',
     definition: 'Lista estruturada de todos os componentes, matérias-primas e quantidades necessárias para fabricar um produto acabado.',
-    examples: ['1 motor + 2 mancais + 1 correia', 'Estrutura hierárquica de componentes']
+    examples: ['1 PCB + 1 bateria + 1 tela + 1 câmera', 'Estrutura: Produto → Subconjunto → Componente']
   },
   {
     id: 'eoq',
     term: 'EOQ/MC',
     fullName: 'Economic Order Quantity / Modelo de Compra',
     definition: 'Quantidade ótima de pedido que minimiza os custos totais de estoque (custo de pedido + custo de manutenção).',
-    examples: ['Lote econômico: 245 unidades', 'Ponto de reposição: 150 unidades']
+    examples: ['Lote econômico: 850 baterias', 'Ponto de reposição: 400 telas OLED']
   },
   {
     id: 'erp',

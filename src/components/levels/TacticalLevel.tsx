@@ -10,33 +10,34 @@ interface TacticalLevelProps {
 }
 
 const TacticalLevel = ({ onNext, onPrevious }: TacticalLevelProps) => {
-  const [selectedSKU, setSelectedSKU] = useState('SKU001');
+  const [selectedSKU, setSelectedSKU] = useState('CELL001');
 
   const bomData = [
-    { item: 'Matéria-prima A', quantity: 2.5, unit: 'kg', supplier: 'Fornecedor Alpha' },
-    { item: 'Componente B', quantity: 1, unit: 'un', supplier: 'Fornecedor Beta' },
-    { item: 'Parafuso M6', quantity: 4, unit: 'un', supplier: 'Fornecedor Gamma' },
-    { item: 'Tinta especial', quantity: 0.5, unit: 'L', supplier: 'Fornecedor Delta' }
+    { item: 'Placa-mãe Celular', quantity: 1, unit: 'un', supplier: 'Foxconn Electronics' },
+    { item: 'Bateria Li-ion 4000mAh', quantity: 1, unit: 'un', supplier: 'CATL Battery' },
+    { item: 'Tela OLED 6.5"', quantity: 1, unit: 'un', supplier: 'Samsung Display' },
+    { item: 'Câmera 64MP', quantity: 1, unit: 'un', supplier: 'Sony Imaging' },
+    { item: 'Carcaça Celular', quantity: 1, unit: 'un', supplier: 'Precision Mold' }
   ];
 
   const suppliersData = [
-    { supplier: 'Fornecedor Alpha', status: 'enviado', items: 3, lastSent: '25/09/2024' },
-    { supplier: 'Fornecedor Beta', status: 'pendente', items: 1, lastSent: '24/09/2024' },
-    { supplier: 'Fornecedor Gamma', status: 'confirmado', items: 2, lastSent: '25/09/2024' },
-    { supplier: 'Fornecedor Delta', status: 'enviado', items: 1, lastSent: '25/09/2024' }
+    { supplier: 'Foxconn Electronics', status: 'enviado', items: 2, lastSent: '25/09/2024' },
+    { supplier: 'Samsung Display', status: 'pendente', items: 2, lastSent: '24/09/2024' },
+    { supplier: 'CATL Battery', status: 'confirmado', items: 2, lastSent: '25/09/2024' },
+    { supplier: 'Sony Imaging', status: 'enviado', items: 1, lastSent: '25/09/2024' }
   ];
 
   const demandForecast = [
-    { sku: 'SKU001', week1: 1200, week2: 1350, week3: 1100, week4: 1400 },
-    { sku: 'SKU002', week1: 800, week2: 750, week3: 900, week4: 850 },
-    { sku: 'SKU003', week1: 600, week2: 650, week3: 580, week4: 720 }
+    { sku: 'CELL001', week1: 1350, week2: 1200, week3: 1500, week4: 1400 },
+    { sku: 'DRONE001', week1: 800, week2: 900, week3: 750, week4: 950 },
+    { sku: 'MON001', week1: 600, week2: 650, week3: 580, week4: 720 }
   ];
 
   const productionLots = [
-    { id: 'L001', sku: 'SKU001', quantity: 500, machine: 'Máquina 1', status: 'liberado', priority: 'alta' },
-    { id: 'L002', sku: 'SKU002', quantity: 300, machine: 'Máquina 2', status: 'pendente', priority: 'média' },
-    { id: 'L003', sku: 'SKU001', quantity: 400, machine: 'Máquina 1', status: 'liberado', priority: 'alta' },
-    { id: 'L004', sku: 'SKU003', quantity: 250, machine: 'Máquina 3', status: 'planejado', priority: 'baixa' }
+    { id: 'L001', sku: 'CELL001', quantity: 450, machine: 'Linha SMT', status: 'liberado', priority: 'alta' },
+    { id: 'L002', sku: 'DRONE001', quantity: 200, machine: 'Mesa Montagem', status: 'pendente', priority: 'média' },
+    { id: 'L003', sku: 'CELL001', quantity: 350, machine: 'Teste ICT', status: 'liberado', priority: 'alta' },
+    { id: 'L004', sku: 'MON001', quantity: 180, machine: 'Pick & Place', status: 'planejado', priority: 'baixa' }
   ];
 
   const getStatusColor = (status: string) => {
@@ -95,9 +96,9 @@ const TacticalLevel = ({ onNext, onPrevious }: TacticalLevelProps) => {
                   onChange={(e) => setSelectedSKU(e.target.value)}
                   className="w-full p-2 border rounded"
                 >
-                  <option value="SKU001">SKU001 - Produto A</option>
-                  <option value="SKU002">SKU002 - Produto B</option>
-                  <option value="SKU003">SKU003 - Produto C</option>
+                  <option value="CELL001">CELL001 - Celular Galaxy X1</option>
+                  <option value="DRONE001">DRONE001 - Drone Pro FPV</option>
+                  <option value="MON001">MON001 - Monitor 4K Gaming</option>
                 </select>
               </div>
 
@@ -201,7 +202,7 @@ const TacticalLevel = ({ onNext, onPrevious }: TacticalLevelProps) => {
             
             <div className="mt-4 p-3 bg-tactical/5 rounded-lg">
               <p className="text-sm">
-                <span className="font-medium">Tendência:</span> Demanda crescente de 8% para SKU001, estável para demais produtos.
+                <span className="font-medium">Tendência:</span> Demanda crescente de 12% para CELL001, sazonalidade positiva para DRONE001 no fim do ano.
               </p>
             </div>
           </CardContent>

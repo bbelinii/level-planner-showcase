@@ -11,40 +11,49 @@ interface OperationalLevelProps {
 }
 
 const OperationalLevel = ({ onPrevious }: OperationalLevelProps) => {
-  const [selectedMachine, setSelectedMachine] = useState('Máquina 1');
+  const [selectedMachine, setSelectedMachine] = useState('Linha SMT Panasonic');
 
   const machineProduction = {
-    'Máquina 1': [
-      { order: 'OP001', sku: 'SKU001', qty: 500, time: '08:00-12:00', status: 'em-andamento' },
-      { order: 'OP003', sku: 'SKU001', qty: 400, time: '13:00-16:00', status: 'programado' }
+    'Linha SMT Panasonic': [
+      { order: 'OP001', sku: 'CELL001', qty: 450, time: '08:00-12:00', status: 'em-andamento' },
+      { order: 'OP004', sku: 'CELL001', qty: 350, time: '13:00-17:00', status: 'programado' }
     ],
-    'Máquina 2': [
-      { order: 'OP002', sku: 'SKU002', qty: 300, time: '08:00-14:00', status: 'concluído' },
-      { order: 'OP005', sku: 'SKU003', qty: 200, time: '14:30-18:00', status: 'programado' }
+    'Pick & Place Yamaha': [
+      { order: 'OP003', sku: 'MON001', qty: 180, time: '08:00-14:00', status: 'concluído' },
+      { order: 'OP006', sku: 'DRONE001', qty: 120, time: '14:30-18:00', status: 'programado' }
     ],
-    'Máquina 3': [
-      { order: 'OP004', sku: 'SKU003', qty: 250, time: '09:00-13:00', status: 'programado' }
+    'Mesa Montagem Final': [
+      { order: 'OP002', sku: 'DRONE001', qty: 200, time: '09:00-16:00', status: 'programado' }
+    ],
+    'Estação Teste ICT': [
+      { order: 'OP007', sku: 'CELL001', qty: 300, time: '10:00-15:00', status: 'programado' }
     ]
   };
 
   const suppliersStatus = [
-    { supplier: 'Fornecedor Alpha', items: ['Matéria-prima A', 'Componente X'], status: 'entregue', date: '25/09' },
-    { supplier: 'Fornecedor Beta', items: ['Componente B'], status: 'pendente', date: '26/09' },
-    { supplier: 'Fornecedor Gamma', items: ['Parafusos', 'Porcas'], status: 'em-trânsito', date: '26/09' }
+    { supplier: 'Foxconn Electronics', items: ['Placa-mãe Celular', 'Controlador de Voo'], status: 'entregue', date: '25/09' },
+    { supplier: 'Samsung Display', items: ['Tela OLED 6.5"', 'Painel LED 27"'], status: 'pendente', date: '26/09' },
+    { supplier: 'CATL Battery', items: ['Bateria Li-ion', 'Bateria Drone'], status: 'em-trânsito', date: '26/09' }
   ];
 
   const dashboardMetrics = [
-    { title: 'Eficiência Geral', value: '87%', status: 'normal' },
-    { title: 'Qualidade', value: '98.5%', status: 'excelente' },
-    { title: 'Disponibilidade', value: '92%', status: 'normal' },
-    { title: 'Entregas no Prazo', value: '94%', status: 'bom' }
+    { title: 'OEE - Eficiência Geral', value: '87%', status: 'normal' },
+    { title: 'Yield - Taxa de Aprovação', value: '98.2%', status: 'excelente' },
+    { title: 'Disponibilidade SMT', value: '94%', status: 'bom' },
+    { title: 'Entregas no Prazo', value: '96%', status: 'excelente' }
   ];
 
   const stockReport = [
-    { item: 'Matéria-prima A', current: 2400, min: 1000, max: 5000, status: 'normal' },
-    { item: 'Componente B', current: 150, min: 200, max: 800, status: 'baixo' },
-    { item: 'Produto Acabado SKU001', current: 850, min: 500, max: 1500, status: 'normal' },
-    { item: 'Produto Acabado SKU002', current: 320, min: 300, max: 1000, status: 'normal' }
+    { item: 'Placa-mãe Celular', current: 850, min: 500, max: 1500, status: 'normal' },
+    { item: 'Bateria Li-ion 4000mAh', current: 320, min: 400, max: 1200, status: 'baixo' },
+    { item: 'Tela OLED 6.5"', current: 680, min: 300, max: 1000, status: 'normal' },
+    { item: 'Controlador de Voo', current: 190, min: 200, max: 600, status: 'baixo' },
+    { item: 'Motor Brushless', current: 1280, min: 800, max: 2400, status: 'normal' },
+    { item: 'Painel LED 27"', current: 420, min: 250, max: 800, status: 'normal' },
+    { item: 'Câmera Drone 4K', current: 95, min: 150, max: 500, status: 'crítico' },
+    { item: 'Produto Acabado Celular', current: 1200, min: 800, max: 2000, status: 'normal' },
+    { item: 'Produto Acabado Drone', current: 650, min: 400, max: 1200, status: 'normal' },
+    { item: 'Produto Acabado Monitor', current: 380, min: 300, max: 900, status: 'normal' }
   ];
 
   const getStatusColor = (status: string) => {
@@ -53,6 +62,7 @@ const OperationalLevel = ({ onPrevious }: OperationalLevelProps) => {
       case 'em-andamento': case 'em-trânsito': case 'bom': return 'secondary';
       case 'programado': case 'pendente': case 'normal': return 'outline';
       case 'baixo': return 'destructive';
+      case 'crítico': return 'destructive';
       default: return 'outline';
     }
   };

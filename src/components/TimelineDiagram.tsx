@@ -23,62 +23,62 @@ const TimelineDiagram = () => {
   const timelineData: TimelineItem[] = [
     {
       id: 'OP001',
-      machine: 'Máquina 1',
-      operation: 'Usinagem SKU001',
+      machine: 'Linha SMT Panasonic',
+      operation: 'Montagem PCB Celular',
       startTime: '08:00',
       endTime: '12:00',
       duration: 4,
       status: 'completed',
-      sku: 'SKU001',
-      quantity: 500
+      sku: 'CELL001',
+      quantity: 450
     },
     {
       id: 'OP002',
-      machine: 'Máquina 1',
-      operation: 'Setup + Usinagem SKU002',
+      machine: 'Linha SMT Panasonic',
+      operation: 'Setup + SMT Monitor',
       startTime: '13:00',
       endTime: '17:00',
       duration: 4,
       status: 'in-progress',
-      sku: 'SKU002',
-      quantity: 300
+      sku: 'MON001',
+      quantity: 180
     },
     {
       id: 'OP003',
-      machine: 'Máquina 2',
-      operation: 'Montagem SKU003',
+      machine: 'Pick & Place Yamaha',
+      operation: 'Montagem Drone PCB',
       startTime: '08:00',
       endTime: '14:00',
       duration: 6,
       status: 'completed',
-      sku: 'SKU003',
-      quantity: 400
+      sku: 'DRONE001',
+      quantity: 200
     },
     {
       id: 'OP004',
-      machine: 'Máquina 2',
-      operation: 'Acabamento SKU001',
+      machine: 'Mesa Montagem Final',
+      operation: 'Montagem Final Celular',
       startTime: '14:30',
       endTime: '18:00',
       duration: 3.5,
       status: 'scheduled',
-      sku: 'SKU001',
-      quantity: 250
+      sku: 'CELL001',
+      quantity: 350
     },
     {
       id: 'OP005',
-      machine: 'Máquina 3',
-      operation: 'Pintura SKU002',
+      machine: 'Estação Teste ICT',
+      operation: 'Teste Funcional Drone',
       startTime: '09:00',
       endTime: '16:00',
       duration: 7,
       status: 'delayed',
-      sku: 'SKU002',
-      quantity: 200
+      sku: 'DRONE001',
+      quantity: 120
     }
   ];
 
-  const machines = ['Máquina 1', 'Máquina 2', 'Máquina 3'];
+  const machines = ['Linha SMT Panasonic', 'Pick & Place Yamaha', 'Mesa Montagem Final', 'Estação Teste ICT'];
   const timeSlots = ['08:00', '09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'];
 
   const getStatusColor = (status: string) => {
