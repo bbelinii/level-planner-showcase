@@ -3,7 +3,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
-import Breadcrumbs from '@/components/Breadcrumbs';
 import { mockMPS, mockStock, mockMachines, mockProductionOrders } from '@/data/mockData';
 import { Settings, ArrowRight, Package, AlertTriangle, CheckCircle, Clock, Users } from 'lucide-react';
 
@@ -62,25 +61,18 @@ const TacticalLevel = () => {
   };
 
   return (
-    <section className="py-16 px-4 bg-tactical-muted/5">
+    <section className="py-8 bg-tactical-muted/5">
       <div className="container mx-auto max-w-7xl">
-        <Breadcrumbs 
-          items={[
-            { label: 'Home', onClick: () => window.scrollTo({ top: 0, behavior: 'smooth' }) },
-            { label: 'Nível Tático' }
-          ]} 
-        />
-
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 bg-tactical/10 text-tactical px-4 py-2 rounded-full text-sm font-medium mb-4">
             <Settings className="h-4 w-4" />
-            Nível Tático
+            Controle Tático
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Planejamento e Controle Tático
+          <h2 className="text-2xl md:text-3xl font-bold mb-4">
+            Gestão de Estoques e Planejamento de Produção
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Converta o PMP em MPS, gerencie estoques e planeje a capacidade por máquina e período.
+            Converta o PMP em ordens de produção, gerencie estoques e planeje capacidade por máquina.
           </p>
         </div>
 

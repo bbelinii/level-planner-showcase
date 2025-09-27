@@ -3,7 +3,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button';
 import { Slider } from '@/components/ui/slider';
 import { Badge } from '@/components/ui/badge';
-import Breadcrumbs from '@/components/Breadcrumbs';
 import { mockPMP, mockSKUs, calculateEOQ, glossaryTerms, type EOQParams } from '@/data/mockData';
 import { BarChart3, Calculator, BookOpen, TrendingUp, Package, DollarSign } from 'lucide-react';
 
@@ -31,25 +30,18 @@ const StrategicLevel = () => {
   }));
 
   return (
-    <section className="py-16 px-4 bg-strategic-muted/5">
+    <section className="py-8 bg-strategic-muted/5">
       <div className="container mx-auto max-w-7xl">
-        <Breadcrumbs 
-          items={[
-            { label: 'Home', onClick: () => window.scrollTo({ top: 0, behavior: 'smooth' }) },
-            { label: 'Nível Estratégico' }
-          ]} 
-        />
-
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 bg-strategic/10 text-strategic px-4 py-2 rounded-full text-sm font-medium mb-4">
             <BarChart3 className="h-4 w-4" />
-            Nível Estratégico
+            Planejamento Estratégico
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Planejamento e Análise Estratégica
+          <h2 className="text-2xl md:text-3xl font-bold mb-4">
+            Análise de Demanda e Políticas de Produção
           </h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Defina políticas de produção, analise cenários e calcule parâmetros otimizados para decisões de longo prazo.
+            Configure cenários, calcule parâmetros otimizados e defina políticas para decisões de longo prazo.
           </p>
         </div>
 
@@ -197,7 +189,7 @@ const StrategicLevel = () => {
                   Glossário Interativo
                 </CardTitle>
                 <CardDescription>
-                  Conceitos fundamentais da engenharia de produção
+                  Conceitos fundamentais de gestão de produção
                 </CardDescription>
               </CardHeader>
               <CardContent>
