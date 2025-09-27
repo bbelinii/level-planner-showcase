@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Progress } from '@/components/ui/progress';
 import { Wrench, ArrowLeft, Package, Users, BarChart3, AlertTriangle, CheckCircle, Clock } from 'lucide-react';
+import TimelineDiagram from '@/components/TimelineDiagram';
 
 interface OperationalLevelProps {
   onPrevious?: () => void;
@@ -73,6 +74,11 @@ const OperationalLevel = ({ onPrevious }: OperationalLevelProps) => {
         <p className="text-muted-foreground max-w-2xl mx-auto">
           Definição de produção por máquina e acompanhamento em tempo real
         </p>
+      </div>
+
+      {/* Timeline Diagram */}
+      <div className="mb-8">
+        <TimelineDiagram />
       </div>
 
       <div className="grid lg:grid-cols-2 gap-8 mb-8">
