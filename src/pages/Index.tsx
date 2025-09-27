@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import StrategicLevel from '@/components/levels/StrategicLevel';
 import TacticalLevel from '@/components/levels/TacticalLevel';
 import OperationalLevel from '@/components/levels/OperationalLevel';
-import { BarChart3, Settings, Wrench, Building2 } from 'lucide-react';
+import LoginScreen from '@/components/LoginScreen';
+import { BarChart3, Settings, Wrench, Building2, LogOut, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import pcpLogo from '@/assets/pcp-lite-logo.png';
 import GlossaryDialog from '@/components/GlossaryDialog';
 
 const Index = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [currentLevel, setCurrentLevel] = useState<'home' | 'strategic' | 'tactical' | 'operational'>('home');
 
   const levels = [
@@ -38,6 +40,20 @@ const Index = () => {
     setCurrentLevel(level);
   };
 
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setCurrentLevel('home');
+  };
+
+  // Show login screen if not logged in
+  if (!isLoggedIn) {
+    return <LoginScreen onLogin={handleLogin} />;
+  }
+
   if (currentLevel !== 'home') {
     return (
       <div className="min-h-screen bg-background">
@@ -59,6 +75,15 @@ const Index = () => {
                   className="hover-scale"
                 >
                   Menu Principal
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={handleLogout}
+                  className="flex items-center gap-2 text-muted-foreground hover:text-foreground"
+                >
+                  <LogOut className="h-4 w-4" />
+                  Sair
                 </Button>
               </div>
             </div>
@@ -95,7 +120,22 @@ const Index = () => {
               </div>
               <span className="ml-3 text-xl font-bold text-foreground">PCP lite</span>
             </div>
-            <GlossaryDialog />
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 px-3 py-1.5 bg-muted/50 rounded-lg">
+                <User className="h-4 w-4 text-muted-foreground" />
+                <span className="text-sm text-muted-foreground">Usuário Demo</span>
+              </div>
+              <GlossaryDialog />
+              <Button 
+                variant="outline" 
+                size="sm"
+                onClick={handleLogout}
+                className="flex items-center gap-2"
+              >
+                <LogOut className="h-4 w-4" />
+                Sair
+              </Button>
+            </div>
           </div>
         </div>
       </header>
@@ -109,10 +149,10 @@ const Index = () => {
               <img src={pcpLogo} alt="PCP lite" className="w-full h-full object-contain" />
             </div>
             <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-              Empresa Modelo
+              TechPro Manufacturing
             </h1>
             <p className="text-xl text-muted-foreground italic">
-              "Visar o presente pensando no futuro"
+              "Inovação em cada produto, excelência em cada processo"
             </p>
           </div>
         </div>
@@ -144,10 +184,10 @@ const Index = () => {
           })}
         </div>
 
-        {/* Educational note */}
-        <div className="text-center mt-16 p-4 bg-muted/30 rounded-xl">
-          <p className="text-sm text-muted-foreground">
-            🎓 Projeto Educacional • Dados simulados para fins didáticos
+        {/* System info */}
+        <div className="text-center mt-16 p-4 bg-primary/5 rounded-xl border border-primary/20">
+          <p className="text-sm text-primary font-medium">
+            📱 Fabricação de Celulares, Drones e Monitores • Sistema PCP Integrado
           </p>
         </div>
       </main>
