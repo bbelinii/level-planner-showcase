@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import StrategicLevel from '@/components/levels/StrategicLevel';
 import TacticalLevel from '@/components/levels/TacticalLevel';
 import OperationalLevel from '@/components/levels/OperationalLevel';
-import { BarChart3, Settings, Wrench, Factory, Building2 } from 'lucide-react';
+import { BarChart3, Settings, Wrench, Building2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import pcpLogo from '@/assets/pcp-logo.png';
 
 const Index = () => {
   const [currentLevel, setCurrentLevel] = useState<'home' | 'strategic' | 'tactical' | 'operational'>('home');
@@ -43,10 +44,10 @@ const Index = () => {
         <header className="bg-background/95 backdrop-blur-md border-b border-border sticky top-0 z-50">
           <div className="container mx-auto px-4 py-4">
             <div className="flex items-center">
-              <div className="w-10 h-10 bg-gradient-hero rounded-xl flex items-center justify-center">
-                <Factory className="h-6 w-6 text-white" />
-              </div>
-              <span className="ml-3 text-xl font-bold text-foreground">Sistema de Produção</span>
+            <div className="w-10 h-10 rounded-xl flex items-center justify-center overflow-hidden">
+              <img src={pcpLogo} alt="PCP lite" className="w-full h-full object-contain" />
+            </div>
+            <span className="ml-3 text-xl font-bold text-foreground">PCP lite</span>
             </div>
           </div>
         </header>
@@ -75,10 +76,10 @@ const Index = () => {
       <header className="bg-background/95 backdrop-blur-md border-b border-border sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center">
-            <div className="w-10 h-10 bg-gradient-hero rounded-xl flex items-center justify-center">
-              <Factory className="h-6 w-6 text-white" />
-            </div>
-            <span className="ml-3 text-xl font-bold text-foreground">Sistema de Produção</span>
+          <div className="w-10 h-10 rounded-xl flex items-center justify-center overflow-hidden">
+            <img src={pcpLogo} alt="PCP lite" className="w-full h-full object-contain" />
+          </div>
+          <span className="ml-3 text-xl font-bold text-foreground">PCP lite</span>
           </div>
         </div>
       </header>
