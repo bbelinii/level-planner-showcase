@@ -61,21 +61,21 @@ const TacticalLevel = ({ onNext, onPrevious }: TacticalLevelProps) => {
   };
 
   return (
-    <div className="py-2 max-h-screen overflow-hidden">
-      <div className="text-center mb-2">
-        <div className="inline-flex items-center gap-1.5 bg-tactical/10 text-tactical px-2.5 py-1 rounded-full text-xs font-medium mb-2">
+    <div className="py-1 h-screen overflow-hidden flex flex-col">
+      <div className="text-center mb-1">
+        <div className="inline-flex items-center gap-1.5 bg-tactical/10 text-tactical px-2.5 py-0.5 rounded-full text-xs font-medium mb-1">
           <Settings className="h-3 w-3" />
           Nível Tático
         </div>
-        <h2 className="text-xl font-bold mb-1 px-4">
+        <h2 className="text-lg font-bold mb-0.5">
           Controle Tático
         </h2>
-        <p className="text-xs text-muted-foreground max-w-2xl mx-auto px-4">
+        <p className="text-[10px] text-muted-foreground">
           Gestão de materiais e planejamento detalhado
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 mb-2">
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-2 mb-1 flex-1 overflow-hidden">
         {/* BOM - Lista de Materiais */}
         <Card className="shadow-lg">
           <CardHeader className="p-2">
@@ -233,9 +233,9 @@ const TacticalLevel = ({ onNext, onPrevious }: TacticalLevelProps) => {
       </div>
 
       {/* Navigation Buttons */}
-      <div className="flex justify-between gap-2 mt-2">
+      <div className="flex justify-between gap-2 mt-1">
         {onPrevious && (
-          <Button variant="outline" onClick={onPrevious} size="sm" className="text-xs h-7">
+          <Button variant="outline" onClick={onPrevious} size="sm" className="text-xs h-6">
             <ArrowLeft className="mr-1 h-3 w-3" />
             Estratégico
           </Button>
@@ -245,7 +245,7 @@ const TacticalLevel = ({ onNext, onPrevious }: TacticalLevelProps) => {
           <Button 
             onClick={onNext} 
             size="sm"
-            className="bg-tactical text-tactical-foreground hover:bg-tactical/90 ml-auto text-xs h-7"
+            className="bg-tactical text-tactical-foreground hover:bg-tactical/90 ml-auto text-xs h-6"
           >
             Operacional
             <ArrowRight className="ml-1 h-3 w-3" />

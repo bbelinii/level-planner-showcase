@@ -117,156 +117,75 @@ const TimelineDiagram = () => {
 
   return (
     <Card className="shadow-lg">
-      <CardHeader>
-        <CardTitle className="flex items-center gap-2">
-          <Clock className="h-5 w-5 text-operational" />
-          Diagrama de Tempos - Programação de Produção
+      <CardHeader className="p-2">
+        <CardTitle className="flex items-center gap-1.5 text-sm">
+          <Clock className="h-3.5 w-3.5 text-operational" />
+          Timeline de Produção
         </CardTitle>
-        <CardDescription>
-          Visualização temporal das operações por máquina
-        </CardDescription>
       </CardHeader>
-      <CardContent>
-        <div className="space-y-6">
-          {/* Filtros */}
-          <div className="flex gap-4 flex-wrap">
-            <div className="flex gap-2">
+      <CardContent className="p-2 pt-0">
+        <div className="space-y-2">
+          {/* Filtros compactos */}
+          <div className="flex gap-1 flex-wrap">
+            <Button
+              variant={selectedMachine === 'all' ? 'default' : 'outline'}
+              size="sm"
+              onClick={() => setSelectedMachine('all')}
+              className="text-[10px] h-5 px-2"
+            >
+              Todas
+            </Button>
+            {machines.slice(0, 2).map(machine => (
               <Button
-                variant={selectedDay === 'today' ? 'default' : 'outline'}
+                key={machine}
+                variant={selectedMachine === machine ? 'default' : 'outline'}
                 size="sm"
-                onClick={() => setSelectedDay('today')}
+                onClick={() => setSelectedMachine(machine)}
+                className="text-[10px] h-5 px-2"
               >
-                <Calendar className="h-4 w-4 mr-1" />
-                Hoje
+                {machine.split(' ')[0]}
               </Button>
-              <Button
-                variant={selectedDay === 'tomorrow' ? 'default' : 'outline'}
-                size="sm"
-                onClick={() => setSelectedDay('tomorrow')}
-              >
-                Amanhã
-              </Button>
-            </div>
-            
-            <div className="flex gap-2">
-              <Button
-                variant={selectedMachine === 'all' ? 'default' : 'outline'}
-                size="sm"
-                onClick={() => setSelectedMachine('all')}
-              >
-                Todas as Máquinas
-              </Button>
-              {machines.map(machine => (
-                <Button
-                  key={machine}
-                  variant={selectedMachine === machine ? 'default' : 'outline'}
-                  size="sm"
-                  onClick={() => setSelectedMachine(machine)}
-                >
-                  {machine}
-                </Button>
-              ))}
-            </div>
+            ))}
           </div>
 
-          {/* Timeline Header */}
-          <div className="relative">
-            <div className="flex border-b pb-2 mb-4">
-              <div className="w-24 text-sm font-medium">Máquina</div>
-              <div className="flex-1 relative">
-                <div className="flex justify-between text-xs text-muted-foreground">
-                  {timeSlots.map(time => (
-                    <span key={time} className="w-8 text-center">{time}</span>
-                  ))}
-                </div>
-                {/* Time grid lines */}
-                <div className="absolute top-6 left-0 right-0 h-full">
-                  {timeSlots.map((_, index) => (
-                    <div 
-                      key={index} 
-                      className="absolute h-full border-l border-border/30"
-                      style={{ left: `${(index / (timeSlots.length - 1)) * 100}%` }}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Timeline Content */}
-            <div className="space-y-4">
-              {machines.map(machine => {
-                const machineOperations = filteredData.filter(item => item.machine === machine);
-                
-                return (
-                  <div key={machine} className="flex">
-                    <div className="w-24 py-2 text-sm font-medium text-center border border-border rounded-l bg-muted/30">
-                      {machine}
-                    </div>
-                    <div className="flex-1 relative h-16 border border-l-0 border-border rounded-r">
-                      {/* Timeline bars for operations */}
-                      {machineOperations.map(operation => (
-                        <div
-                          key={operation.id}
-                          className={`absolute h-12 m-1 rounded border-2 ${getStatusColor(operation.status)} cursor-pointer hover:opacity-80 transition-opacity`}
-                          style={{
-                            left: `${getTimePosition(operation.startTime)}%`,
-                            width: `${getItemWidth(operation.duration)}%`
-                          }}
-                          title={`${operation.operation} (${operation.startTime}-${operation.endTime})`}
-                        >
-                          <div className="p-1 h-full flex flex-col justify-center">
-                            <div className="text-xs font-medium truncate">
-                              {operation.id}
-                            </div>
-                            <div className="text-xs truncate opacity-75">
-                              {operation.sku} - {operation.quantity}un
-                            </div>
-                          </div>
-                          
-                          {/* Status indicator */}
-                          {operation.status === 'in-progress' && (
-                            <Play className="absolute top-1 right-1 h-3 w-3" />
-                          )}
-                          {operation.status === 'delayed' && (
-                            <AlertTriangle className="absolute top-1 right-1 h-3 w-3" />
-                          )}
-                        </div>
-                      ))}
-                      
-                      {/* Empty state for machines with no operations */}
-                      {machineOperations.length === 0 && (
-                        <div className="absolute inset-0 flex items-center justify-center text-xs text-muted-foreground">
-                          Sem operações programadas
-                        </div>
-                      )}
-                    </div>
+          {/* Timeline simplificado */}
+          <div className="space-y-1">
+            {machines.slice(0, 3).map(machine => {
+              const machineOperations = filteredData.filter(item => item.machine === machine);
+              
+              return (
+                <div key={machine} className="flex items-center gap-1">
+                  <div className="w-16 text-[9px] font-medium truncate">
+                    {machine.split(' ')[0]}
                   </div>
-                );
-              })}
-            </div>
+                  <div className="flex-1 relative h-6 border border-border rounded bg-muted/10">
+                    {machineOperations.map(operation => (
+                      <div
+                        key={operation.id}
+                        className={`absolute h-5 m-0.5 rounded text-[8px] ${getStatusColor(operation.status)} cursor-pointer`}
+                        style={{
+                          left: `${getTimePosition(operation.startTime)}%`,
+                          width: `${getItemWidth(operation.duration)}%`
+                        }}
+                        title={`${operation.operation}`}
+                      >
+                        <div className="px-1 flex items-center h-full">
+                          <span className="truncate">{operation.id}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
-          {/* Legend and Summary */}
-          <div className="grid md:grid-cols-2 gap-4 pt-4 border-t">
-            <div>
-              <h4 className="font-medium text-sm mb-3">Legenda de Status</h4>
-              <div className="flex flex-wrap gap-2">
-                <Badge variant="default">Concluído</Badge>
-                <Badge variant="secondary">Em Andamento</Badge>
-                <Badge variant="outline">Programado</Badge>
-                <Badge variant="destructive">Atrasado</Badge>
-              </div>
-            </div>
-            
-            <div>
-              <h4 className="font-medium text-sm mb-3">Resumo do Dia</h4>
-              <div className="space-y-1 text-sm text-muted-foreground">
-                <div>• Total de operações: {filteredData.length}</div>
-                <div>• Concluídas: {filteredData.filter(op => op.status === 'completed').length}</div>
-                <div>• Em andamento: {filteredData.filter(op => op.status === 'in-progress').length}</div>
-                <div>• Atrasadas: {filteredData.filter(op => op.status === 'delayed').length}</div>
-              </div>
-            </div>
+          {/* Legenda compacta */}
+          <div className="flex gap-1 pt-1 border-t">
+            <Badge variant="default" className="text-[8px] px-1 py-0">OK</Badge>
+            <Badge variant="secondary" className="text-[8px] px-1 py-0">Ativo</Badge>
+            <Badge variant="outline" className="text-[8px] px-1 py-0">Prog.</Badge>
+            <Badge variant="destructive" className="text-[8px] px-1 py-0">Atraso</Badge>
           </div>
         </div>
       </CardContent>

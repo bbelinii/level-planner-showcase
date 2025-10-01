@@ -72,26 +72,26 @@ const OperationalLevel = ({ onPrevious }: OperationalLevelProps) => {
   };
 
   return (
-    <div className="py-2 max-h-screen overflow-hidden">
-      <div className="text-center mb-2">
-        <div className="inline-flex items-center gap-1.5 bg-operational/10 text-operational px-2.5 py-1 rounded-full text-xs font-medium mb-2">
+    <div className="py-1 h-screen overflow-hidden flex flex-col">
+      <div className="text-center mb-1">
+        <div className="inline-flex items-center gap-1.5 bg-operational/10 text-operational px-2.5 py-0.5 rounded-full text-xs font-medium mb-1">
           <Wrench className="h-3 w-3" />
           Nível Operacional
         </div>
-        <h2 className="text-xl font-bold mb-1 px-4">
+        <h2 className="text-lg font-bold mb-0.5">
           Execução Operacional
         </h2>
-        <p className="text-xs text-muted-foreground max-w-2xl mx-auto px-4">
+        <p className="text-[10px] text-muted-foreground">
           Produção por máquina e acompanhamento
         </p>
       </div>
 
       {/* Timeline Diagram */}
-      <div className="mb-2">
+      <div className="mb-1">
         <TimelineDiagram />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 mb-2">
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 mb-1 flex-1 overflow-hidden">
         {/* Definição por Máquina */}
         <Card className="shadow-lg">
           <CardHeader className="p-2">
@@ -215,8 +215,8 @@ const OperationalLevel = ({ onPrevious }: OperationalLevelProps) => {
 
       {/* Navigation Button */}
       {onPrevious && (
-        <div className="text-left mt-2">
-          <Button variant="outline" onClick={onPrevious} size="sm" className="text-xs h-7">
+        <div className="text-left mt-1">
+          <Button variant="outline" onClick={onPrevious} size="sm" className="text-xs h-6">
             <ArrowLeft className="mr-1 h-3 w-3" />
             Tático
           </Button>

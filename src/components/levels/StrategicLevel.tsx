@@ -35,26 +35,26 @@ const StrategicLevel = ({ onNext }: StrategicLevelProps) => {
   ];
 
   return (
-    <div className="py-2 max-h-screen overflow-hidden">
-      <div className="text-center mb-2">
-        <div className="inline-flex items-center gap-1.5 bg-strategic/10 text-strategic px-2.5 py-1 rounded-full text-xs font-medium mb-2">
+    <div className="py-1 h-screen overflow-hidden flex flex-col">
+      <div className="text-center mb-1">
+        <div className="inline-flex items-center gap-1.5 bg-strategic/10 text-strategic px-2.5 py-0.5 rounded-full text-xs font-medium mb-1">
           <BarChart3 className="h-3 w-3" />
           Nível Estratégico
         </div>
-        <h2 className="text-xl font-bold mb-1 px-4">
+        <h2 className="text-lg font-bold mb-0.5">
           Planejamento Estratégico
         </h2>
-        <p className="text-xs text-muted-foreground max-w-2xl mx-auto px-4">
-          Análises históricas e definição de políticas de produção
+        <p className="text-[10px] text-muted-foreground">
+          Análises históricas e definição de políticas
         </p>
       </div>
 
       {/* Lista de Produtos */}
-      <div className="mb-2">
+      <div className="mb-1">
         <ProductList />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 mb-2">
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-2 mb-1 flex-1 overflow-hidden">
         {/* Análises Históricas */}
         <Card className="shadow-lg">
           <CardHeader className="p-2">
@@ -221,13 +221,13 @@ const StrategicLevel = ({ onNext }: StrategicLevelProps) => {
 
       {/* Navigation Button */}
       {onNext && (
-        <div className="text-center mt-2">
+        <div className="text-center mt-1">
           <Button 
             onClick={onNext} 
             size="sm"
-            className="bg-strategic text-strategic-foreground hover:bg-strategic/90 w-full sm:w-auto text-xs h-7"
+            className="bg-strategic text-strategic-foreground hover:bg-strategic/90 text-xs h-6"
           >
-            Avançar para Nível Tático
+            Tático
             <ArrowRight className="ml-1 h-3 w-3" />
           </Button>
         </div>

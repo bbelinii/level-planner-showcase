@@ -59,32 +59,32 @@ const Index = () => {
       <div className="min-h-screen bg-background">
         {/* Responsive navbar for level views */}
         <header className="bg-background/95 backdrop-blur-md border-b border-border sticky top-0 z-50">
-          <div className="container mx-auto px-4 py-3 sm:py-4">
+          <div className="w-full px-2 sm:px-4 py-2">
             <div className="flex items-center justify-between gap-2">
               <div className="flex items-center flex-shrink-0">
-                <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-xl flex items-center justify-center overflow-hidden">
+                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl flex items-center justify-center overflow-hidden">
                   <img src={pcpLogo} alt="PCP lite" className="w-full h-full object-contain" />
                 </div>
-                <span className="ml-2 sm:ml-3 text-lg sm:text-xl font-bold text-foreground">PCP lite</span>
+                <span className="ml-2 text-base sm:text-lg font-bold text-foreground">PCP lite</span>
               </div>
-              <div className="flex items-center gap-1 sm:gap-2">
+              <div className="flex items-center gap-1">
                 <GlossaryDialog />
                 <Button 
                   variant="outline" 
                   size="sm"
                   onClick={() => handleLevelNavigation('home')}
-                  className="hover-scale"
+                  className="hover-scale text-xs h-6"
                 >
-                  <span className="hidden sm:inline">Menu Principal</span>
+                  <span className="hidden sm:inline">Menu</span>
                   <span className="sm:hidden">Menu</span>
                 </Button>
                 <Button 
                   variant="outline" 
                   size="sm"
                   onClick={handleLogout}
-                  className="flex items-center gap-1 sm:gap-2"
+                  className="flex items-center gap-1 text-xs h-6"
                 >
-                  <LogOut className="h-4 w-4" />
+                  <LogOut className="h-3 w-3" />
                   <span className="hidden sm:inline">Sair</span>
                 </Button>
               </div>
@@ -92,7 +92,7 @@ const Index = () => {
           </div>
         </header>
 
-        <main className="container mx-auto px-4 py-6 sm:py-8 max-w-7xl">
+        <main className="w-full px-2 sm:px-4 py-2">
           {currentLevel === 'strategic' && (
             <StrategicLevel onNext={() => handleLevelNavigation('tactical')} />
           )}
