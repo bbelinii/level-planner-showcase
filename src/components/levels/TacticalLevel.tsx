@@ -61,219 +61,194 @@ const TacticalLevel = ({ onNext, onPrevious }: TacticalLevelProps) => {
   };
 
   return (
-    <div className="py-4 sm:py-6 md:py-8">
-      <div className="text-center mb-6 sm:mb-8">
-        <div className="inline-flex items-center gap-2 bg-tactical/10 text-tactical px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium mb-3 sm:mb-4">
-          <Settings className="h-3 w-3 sm:h-4 sm:w-4" />
+    <div className="py-2 max-h-screen overflow-hidden">
+      <div className="text-center mb-2">
+        <div className="inline-flex items-center gap-1.5 bg-tactical/10 text-tactical px-2.5 py-1 rounded-full text-xs font-medium mb-2">
+          <Settings className="h-3 w-3" />
           Nível Tático
         </div>
-        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 px-4">
+        <h2 className="text-xl font-bold mb-1 px-4">
           Controle Tático
         </h2>
-        <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto px-4">
-          Gestão de materiais e planejamento detalhado de produção
+        <p className="text-xs text-muted-foreground max-w-2xl mx-auto px-4">
+          Gestão de materiais e planejamento detalhado
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mb-6 sm:mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 mb-2">
         {/* BOM - Lista de Materiais */}
         <Card className="shadow-lg">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Package className="h-5 w-5 text-tactical" />
-              BOM - Lista de Materiais
+          <CardHeader className="p-2">
+            <CardTitle className="flex items-center gap-1.5 text-sm">
+              <Package className="h-3.5 w-3.5 text-tactical" />
+              BOM
             </CardTitle>
-            <CardDescription>
-              Estrutura de materiais para produção
-            </CardDescription>
           </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div>
-                <label className="text-sm font-medium mb-2 block">SKU Selecionado</label>
-                <select 
-                  value={selectedSKU}
-                  onChange={(e) => setSelectedSKU(e.target.value)}
-                  className="w-full p-2 border rounded"
-                >
-                  <option value="CELL001">CELL001 - Celular Galaxy X1</option>
-                  <option value="DRONE001">DRONE001 - Drone Pro FPV</option>
-                  <option value="MON001">MON001 - Monitor 4K Gaming</option>
-                </select>
-              </div>
+          <CardContent className="p-2 pt-0">
+            <select 
+              value={selectedSKU}
+              onChange={(e) => setSelectedSKU(e.target.value)}
+              className="w-full p-1 border rounded text-xs mb-2"
+            >
+              <option value="CELL001">CELL001</option>
+              <option value="DRONE001">DRONE001</option>
+              <option value="MON001">MON001</option>
+            </select>
 
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr className="border-b">
-                      <th className="text-left p-2">Item</th>
-                      <th className="text-right p-2">Qtd</th>
-                      <th className="text-left p-2">Fornecedor</th>
+            <div className="overflow-x-auto">
+              <table className="w-full text-xs">
+                <thead>
+                  <tr className="border-b">
+                    <th className="text-left p-1">Item</th>
+                    <th className="text-right p-1">Qt</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {bomData.map((item, index) => (
+                    <tr key={index} className="border-b hover:bg-muted/50">
+                      <td className="p-1">{item.item.split(' ')[0]}</td>
+                      <td className="p-1 text-right">{item.quantity}</td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {bomData.map((item, index) => (
-                      <tr key={index} className="border-b hover:bg-muted/50">
-                        <td className="p-2">{item.item}</td>
-                        <td className="p-2 text-right">{item.quantity} {item.unit}</td>
-                        <td className="p-2 text-sm text-muted-foreground">{item.supplier}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                  ))}
+                </tbody>
+              </table>
             </div>
           </CardContent>
         </Card>
 
         {/* Envio para Fornecedores */}
         <Card className="shadow-lg">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Users className="h-5 w-5 text-tactical" />
-              Envio da Lista para Fornecedores
+          <CardHeader className="p-2">
+            <CardTitle className="flex items-center gap-1.5 text-sm">
+              <Users className="h-3.5 w-3.5 text-tactical" />
+              Fornecedores
             </CardTitle>
-            <CardDescription>
-              Status do envio de solicitações de materiais
-            </CardDescription>
           </CardHeader>
-          <CardContent>
-            <div className="space-y-3">
+          <CardContent className="p-2 pt-0">
+            <div className="space-y-1.5">
               {suppliersData.map((supplier, index) => (
-                <div key={index} className="p-3 border rounded-lg">
-                  <div className="flex items-center justify-between mb-2">
-                    <h4 className="font-medium text-sm">{supplier.supplier}</h4>
-                    <Badge variant={getStatusColor(supplier.status)}>
+                <div key={index} className="p-1.5 border rounded">
+                  <div className="flex items-center justify-between mb-1">
+                    <h4 className="font-medium text-xs">{supplier.supplier.split(' ')[0]}</h4>
+                    <Badge variant={getStatusColor(supplier.status)} className="text-[9px] px-1 py-0">
                       {supplier.status}
                     </Badge>
                   </div>
-                  <div className="flex justify-between text-xs text-muted-foreground">
-                    <span>{supplier.items} itens solicitados</span>
-                    <span>Último envio: {supplier.lastSent}</span>
+                  <div className="text-[10px] text-muted-foreground">
+                    {supplier.items} itens • {supplier.lastSent}
                   </div>
                 </div>
               ))}
             </div>
             
-            <div className="mt-4 pt-4 border-t">
-              <Button className="w-full bg-tactical text-tactical-foreground hover:bg-tactical/90">
-                Reenviar Solicitações Pendentes
-              </Button>
-            </div>
+            <Button className="w-full bg-tactical text-tactical-foreground hover:bg-tactical/90 mt-2 text-xs h-6">
+              Reenviar Pendentes
+            </Button>
           </CardContent>
         </Card>
 
         {/* Previsão de Demanda */}
         <Card className="shadow-lg">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Clock className="h-5 w-5 text-tactical" />
-              Previsão de Demanda
+          <CardHeader className="p-2">
+            <CardTitle className="flex items-center gap-1.5 text-sm">
+              <Clock className="h-3.5 w-3.5 text-tactical" />
+              Previsão Demanda
             </CardTitle>
-            <CardDescription>
-              Projeção de demanda para as próximas semanas
-            </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-2 pt-0">
             <div className="overflow-x-auto">
-              <table className="w-full text-sm">
+              <table className="w-full text-xs">
                 <thead>
                   <tr className="border-b">
-                    <th className="text-left p-2">SKU</th>
-                    <th className="text-right p-2">Sem 1</th>
-                    <th className="text-right p-2">Sem 2</th>
-                    <th className="text-right p-2">Sem 3</th>
-                    <th className="text-right p-2">Sem 4</th>
+                    <th className="text-left p-1">SKU</th>
+                    <th className="text-right p-1">S1</th>
+                    <th className="text-right p-1">S2</th>
+                    <th className="text-right p-1">S3</th>
+                    <th className="text-right p-1">S4</th>
                   </tr>
                 </thead>
                 <tbody>
                   {demandForecast.map((item, index) => (
                     <tr key={index} className="border-b hover:bg-muted/50">
-                      <td className="p-2 font-medium">{item.sku}</td>
-                      <td className="p-2 text-right">{item.week1}</td>
-                      <td className="p-2 text-right">{item.week2}</td>
-                      <td className="p-2 text-right">{item.week3}</td>
-                      <td className="p-2 text-right">{item.week4}</td>
+                      <td className="p-1 font-medium">{item.sku}</td>
+                      <td className="p-1 text-right">{(item.week1/1000).toFixed(1)}k</td>
+                      <td className="p-1 text-right">{(item.week2/1000).toFixed(1)}k</td>
+                      <td className="p-1 text-right">{(item.week3/1000).toFixed(1)}k</td>
+                      <td className="p-1 text-right">{(item.week4/1000).toFixed(1)}k</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
             
-            <div className="mt-4 p-3 bg-tactical/5 rounded-lg">
-              <p className="text-sm">
-                <span className="font-medium">Tendência:</span> Demanda crescente de 12% para CELL001, sazonalidade positiva para DRONE001 no fim do ano.
-              </p>
+            <div className="mt-2 p-1.5 bg-tactical/5 rounded text-[10px]">
+              <span className="font-medium">Tendência:</span> +12% CELL001
             </div>
           </CardContent>
         </Card>
 
         {/* Liberação de Lotes */}
         <Card className="shadow-lg">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <CheckCircle className="h-5 w-5 text-tactical" />
-              Liberação de Lotes para Máquinas
+          <CardHeader className="p-2">
+            <CardTitle className="flex items-center gap-1.5 text-sm">
+              <CheckCircle className="h-3.5 w-3.5 text-tactical" />
+              Lotes de Produção
             </CardTitle>
-            <CardDescription>
-              Ordens de produção liberadas e programadas
-            </CardDescription>
           </CardHeader>
-          <CardContent>
-            <div className="space-y-3">
+          <CardContent className="p-2 pt-0">
+            <div className="space-y-1.5">
               {productionLots.map((lot, index) => (
-                <div key={index} className="p-3 border rounded-lg">
-                  <div className="flex items-center justify-between mb-2">
+                <div key={index} className="p-1.5 border rounded">
+                  <div className="flex items-center justify-between mb-1">
                     <div>
-                      <h4 className="font-medium text-sm">{lot.id}</h4>
-                      <p className="text-xs text-muted-foreground">{lot.sku} • {lot.quantity} unidades</p>
+                      <h4 className="font-medium text-xs">{lot.id}</h4>
+                      <p className="text-[10px] text-muted-foreground">{lot.sku} • {lot.quantity}</p>
                     </div>
-                    <div className="flex gap-2">
-                      <Badge variant={getPriorityColor(lot.priority)}>
+                    <div className="flex gap-1">
+                      <Badge variant={getPriorityColor(lot.priority)} className="text-[9px] px-1 py-0">
                         {lot.priority}
                       </Badge>
-                      <Badge variant={getStatusColor(lot.status)}>
+                      <Badge variant={getStatusColor(lot.status)} className="text-[9px] px-1 py-0">
                         {lot.status}
                       </Badge>
                     </div>
                   </div>
-                  <div className="text-xs text-muted-foreground">
-                    Máquina: {lot.machine}
+                  <div className="text-[10px] text-muted-foreground">
+                    {lot.machine}
                   </div>
                 </div>
               ))}
             </div>
             
-            <div className="mt-4 pt-4 border-t">
-              <div className="flex gap-2">
-                <Button variant="outline" className="flex-1">
-                  Programar Lotes
-                </Button>
-                <Button className="flex-1 bg-tactical text-tactical-foreground hover:bg-tactical/90">
-                  Liberar Produção
-                </Button>
-              </div>
+            <div className="flex gap-1 mt-2">
+              <Button variant="outline" className="flex-1 text-xs h-6">
+                Programar
+              </Button>
+              <Button className="flex-1 bg-tactical text-tactical-foreground hover:bg-tactical/90 text-xs h-6">
+                Liberar
+              </Button>
             </div>
           </CardContent>
         </Card>
       </div>
 
-      {/* Navigation Buttons - Mobile optimized */}
-      <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-4 mt-6 sm:mt-8">
+      {/* Navigation Buttons */}
+      <div className="flex justify-between gap-2 mt-2">
         {onPrevious && (
-          <Button variant="outline" onClick={onPrevious} className="w-full sm:w-auto">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Voltar ao Estratégico
+          <Button variant="outline" onClick={onPrevious} size="sm" className="text-xs h-7">
+            <ArrowLeft className="mr-1 h-3 w-3" />
+            Estratégico
           </Button>
         )}
         
         {onNext && (
           <Button 
             onClick={onNext} 
-            className="bg-tactical text-tactical-foreground hover:bg-tactical/90 w-full sm:w-auto sm:ml-auto"
+            size="sm"
+            className="bg-tactical text-tactical-foreground hover:bg-tactical/90 ml-auto text-xs h-7"
           >
-            Avançar para Operacional
-            <ArrowRight className="ml-2 h-4 w-4" />
+            Operacional
+            <ArrowRight className="ml-1 h-3 w-3" />
           </Button>
         )}
       </div>
