@@ -61,21 +61,21 @@ const TacticalLevel = ({ onNext, onPrevious }: TacticalLevelProps) => {
   };
 
   return (
-    <div className="py-8">
-      <div className="text-center mb-8">
-        <div className="inline-flex items-center gap-2 bg-tactical/10 text-tactical px-4 py-2 rounded-full text-sm font-medium mb-4">
-          <Settings className="h-4 w-4" />
+    <div className="py-4 sm:py-6 md:py-8">
+      <div className="text-center mb-6 sm:mb-8">
+        <div className="inline-flex items-center gap-2 bg-tactical/10 text-tactical px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium mb-3 sm:mb-4">
+          <Settings className="h-3 w-3 sm:h-4 sm:w-4" />
           Nível Tático
         </div>
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 px-4">
           Controle Tático
         </h2>
-        <p className="text-muted-foreground max-w-2xl mx-auto">
+        <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto px-4">
           Gestão de materiais e planejamento detalhado de produção
         </p>
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-8 mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mb-6 sm:mb-8">
         {/* BOM - Lista de Materiais */}
         <Card className="shadow-lg">
           <CardHeader>
@@ -258,17 +258,20 @@ const TacticalLevel = ({ onNext, onPrevious }: TacticalLevelProps) => {
         </Card>
       </div>
 
-      {/* Navigation Buttons */}
-      <div className="flex justify-between">
+      {/* Navigation Buttons - Mobile optimized */}
+      <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-4 mt-6 sm:mt-8">
         {onPrevious && (
-          <Button variant="outline" onClick={onPrevious}>
+          <Button variant="outline" onClick={onPrevious} className="w-full sm:w-auto">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Voltar ao Estratégico
           </Button>
         )}
         
         {onNext && (
-          <Button onClick={onNext} className="bg-tactical text-tactical-foreground hover:bg-tactical/90 ml-auto">
+          <Button 
+            onClick={onNext} 
+            className="bg-tactical text-tactical-foreground hover:bg-tactical/90 w-full sm:w-auto sm:ml-auto"
+          >
             Avançar para Operacional
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>

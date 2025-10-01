@@ -8,13 +8,14 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
+    /* Base colors - Dark theme with blue accent */
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
 
-    --card: 240 10% 3.9%;
+    --card: 240 8% 8%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 240 10% 3.9%;
+    --popover: 240 8% 8%;
     --popover-foreground: 0 0% 98%;
 
     --primary: 210 100% 50%;
@@ -36,7 +37,7 @@ All colors MUST be HSL.
     --input: 240 3.7% 15.9%;
     --ring: 210 100% 50%;
 
-    /* Níveis hierárquicos */
+    /* Hierarchy level colors */
     --strategic: 210 100% 50%;
     --strategic-foreground: 0 0% 98%;
     --strategic-muted: 210 100% 15%;
@@ -49,22 +50,31 @@ All colors MUST be HSL.
     --operational-foreground: 0 0% 98%;
     --operational-muted: 25 95% 15%;
 
-    /* Gradientes */
+    /* Gradients */
     --gradient-strategic: linear-gradient(135deg, hsl(210 100% 50%), hsl(220 91% 60%));
     --gradient-tactical: linear-gradient(135deg, hsl(142 76% 36%), hsl(152 68% 45%));
     --gradient-operational: linear-gradient(135deg, hsl(25 95% 53%), hsl(35 91% 60%));
     --gradient-hero: linear-gradient(135deg, hsl(210 100% 50%), hsl(142 76% 36%), hsl(25 95% 53%));
-    --gradient-auth: linear-gradient(135deg, hsl(0 84% 60%), hsl(340 82% 52%));
+    --gradient-auth: linear-gradient(135deg, hsl(210 100% 40%), hsl(220 91% 50%));
 
-    /* Sombras */
+    /* Shadows */
     --shadow-strategic: 0 10px 30px -10px hsl(210 100% 50% / 0.3);
     --shadow-tactical: 0 10px 30px -10px hsl(142 76% 36% / 0.3);
     --shadow-operational: 0 10px 30px -10px hsl(25 95% 53% / 0.3);
     --shadow-elevated: 0 20px 50px -15px hsl(240 10% 3.9% / 0.8);
+    --shadow-card: 0 4px 6px -1px hsl(0 0% 0% / 0.1), 0 2px 4px -2px hsl(0 0% 0% / 0.1);
 
-    /* Transições */
+    /* Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    /* Spacing scale for consistency */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-2xl: 3rem;
 
     --radius: 0.5rem;
 
@@ -131,5 +141,28 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Improved touch targets for mobile */
+  button,
+  [role="button"],
+  a {
+    @apply min-h-[44px] sm:min-h-0;
+  }
+
+  /* Better table responsiveness */
+  .table-responsive {
+    @apply overflow-x-auto -mx-4 px-4 sm:mx-0 sm:px-0;
+  }
+
+  /* Utility for better card spacing on mobile */
+  .card-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8;
+  }
+
+  /* Improved focus visibility */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
   }
 }

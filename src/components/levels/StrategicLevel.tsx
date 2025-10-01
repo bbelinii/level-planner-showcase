@@ -35,16 +35,16 @@ const StrategicLevel = ({ onNext }: StrategicLevelProps) => {
   ];
 
   return (
-    <div className="py-8">
-      <div className="text-center mb-8">
-        <div className="inline-flex items-center gap-2 bg-strategic/10 text-strategic px-4 py-2 rounded-full text-sm font-medium mb-4">
-          <BarChart3 className="h-4 w-4" />
+    <div className="py-4 sm:py-6 md:py-8">
+      <div className="text-center mb-6 sm:mb-8">
+        <div className="inline-flex items-center gap-2 bg-strategic/10 text-strategic px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium mb-3 sm:mb-4">
+          <BarChart3 className="h-3 w-3 sm:h-4 sm:w-4" />
           Nível Estratégico
         </div>
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 px-4">
           Planejamento Estratégico
         </h2>
-        <p className="text-muted-foreground max-w-2xl mx-auto">
+        <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto px-4">
           Análises históricas e definição de políticas de produção
         </p>
       </div>
@@ -52,7 +52,7 @@ const StrategicLevel = ({ onNext }: StrategicLevelProps) => {
       {/* Lista de Produtos */}
       <ProductList />
 
-      <div className="grid lg:grid-cols-2 gap-8 mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mb-6 sm:mb-8">
         {/* Análises Históricas */}
         <Card className="shadow-lg">
           <CardHeader>
@@ -65,25 +65,25 @@ const StrategicLevel = ({ onNext }: StrategicLevelProps) => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
-              <h4 className="font-medium text-sm">Histórico de Vendas e Capacidade</h4>
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
+            <div className="space-y-3 sm:space-y-4">
+              <h4 className="font-medium text-xs sm:text-sm">Histórico de Vendas e Capacidade</h4>
+              <div className="table-responsive">
+                <table className="w-full text-xs sm:text-sm">
                   <thead>
                     <tr className="border-b">
-                      <th className="text-left p-2">Mês</th>
-                      <th className="text-right p-2">Vendas</th>
-                      <th className="text-right p-2">Estoque</th>
-                      <th className="text-right p-2">Capacidade</th>
+                      <th className="text-left p-1.5 sm:p-2">Mês</th>
+                      <th className="text-right p-1.5 sm:p-2">Vendas</th>
+                      <th className="text-right p-1.5 sm:p-2 hidden sm:table-cell">Estoque</th>
+                      <th className="text-right p-1.5 sm:p-2">Cap.</th>
                     </tr>
                   </thead>
                   <tbody>
                     {salesData.map((item, index) => (
-                      <tr key={index} className="border-b hover:bg-muted/50">
-                        <td className="p-2 font-medium">{item.month}</td>
-                        <td className="p-2 text-right">{item.sales.toLocaleString()}</td>
-                        <td className="p-2 text-right">{item.stock.toLocaleString()}</td>
-                        <td className="p-2 text-right">{item.capacity}%</td>
+                      <tr key={index} className="border-b hover:bg-muted/50 transition-colors">
+                        <td className="p-1.5 sm:p-2 font-medium">{item.month}</td>
+                        <td className="p-1.5 sm:p-2 text-right">{item.sales.toLocaleString()}</td>
+                        <td className="p-1.5 sm:p-2 text-right hidden sm:table-cell">{item.stock.toLocaleString()}</td>
+                        <td className="p-1.5 sm:p-2 text-right">{item.capacity}%</td>
                       </tr>
                     ))}
                   </tbody>
@@ -105,10 +105,10 @@ const StrategicLevel = ({ onNext }: StrategicLevelProps) => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-3 sm:space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div className="p-3 border rounded-lg">
-                  <h4 className="font-medium text-sm mb-2">Para Estoque</h4>
+                  <h4 className="font-medium text-xs sm:text-sm mb-2">Para Estoque</h4>
                   <ul className="text-xs text-muted-foreground space-y-1">
                     <li>• Demanda estável</li>
                     <li>• Produtos padronizados</li>
@@ -116,7 +116,7 @@ const StrategicLevel = ({ onNext }: StrategicLevelProps) => {
                   </ul>
                 </div>
                 <div className="p-3 border rounded-lg bg-strategic/5">
-                  <h4 className="font-medium text-sm mb-2">Sob Demanda</h4>
+                  <h4 className="font-medium text-xs sm:text-sm mb-2">Sob Demanda</h4>
                   <ul className="text-xs text-muted-foreground space-y-1">
                     <li>• Demanda variável</li>
                     <li>• Produtos customizados</li>
@@ -238,10 +238,14 @@ const StrategicLevel = ({ onNext }: StrategicLevelProps) => {
         </Card>
       </div>
 
-      {/* Navigation Button */}
+      {/* Navigation Button - Mobile optimized */}
       {onNext && (
-        <div className="text-center">
-          <Button onClick={onNext} size="lg" className="bg-strategic text-strategic-foreground hover:bg-strategic/90">
+        <div className="text-center mt-6 sm:mt-8">
+          <Button 
+            onClick={onNext} 
+            size="lg" 
+            className="bg-strategic text-strategic-foreground hover:bg-strategic/90 w-full sm:w-auto"
+          >
             Avançar para Nível Tático
             <ArrowRight className="ml-2 h-4 w-4" />
           </Button>

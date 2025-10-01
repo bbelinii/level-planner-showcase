@@ -104,19 +104,19 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
   };
 
   return (
-    <div className="min-h-screen bg-slate-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-slate-900 flex items-center justify-center p-4 sm:p-6 md:p-8">
       <div className="w-full max-w-4xl animate-scale-in">
-        {/* Main Card */}
-        <div className="bg-slate-800 rounded-2xl shadow-elevated overflow-hidden border border-slate-700">
-          <div className="flex flex-col lg:flex-row min-h-[600px]">
+        {/* Main Card - Responsive */}
+        <div className="bg-slate-800 rounded-xl sm:rounded-2xl shadow-elevated overflow-hidden border border-slate-700">
+          <div className="flex flex-col lg:flex-row min-h-[500px] sm:min-h-[600px]">
             
-            {/* Left Column - Form */}
-            <div className="flex-1 p-8 lg:p-12 flex flex-col justify-center">
+            {/* Left Column - Form - Mobile optimized */}
+            <div className="flex-1 p-6 sm:p-8 lg:p-12 flex flex-col justify-center">
               <div className="max-w-sm mx-auto w-full">
                 
                 {/* Header */}
-                <div className="text-center mb-8">
-                  <h1 className="text-3xl font-bold text-white mb-2">
+                <div className="text-center mb-6 sm:mb-8">
+                  <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">
                     {isSignUp ? 'Criar conta' : 'Entrar'}
                   </h1>
                   <p className="text-gray-400 text-sm">
@@ -126,12 +126,12 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
 
                 {/* Social Login Buttons - Only show on sign in */}
                 {!isSignUp && (
-                  <div className="flex justify-center mb-8">
+                  <div className="flex justify-center mb-6 sm:mb-8">
                     <Button
                       type="button"
                       variant="outline"
                       size="icon"
-                      className="w-12 h-12 rounded-full border-2 border-slate-600 bg-slate-700 hover:bg-slate-600 hover:border-blue-500 text-white"
+                      className="w-12 h-12 rounded-full border-2 border-slate-600 bg-slate-700 hover:bg-slate-600 hover:border-blue-500 text-white transition-all"
                       onClick={() => handleSocialLogin('Google')}
                       disabled={isLoading}
                       aria-label="Entrar com Google"
@@ -141,8 +141,8 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
                   </div>
                 )}
 
-                {/* Form */}
-                <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Form - Responsive spacing */}
+                <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
                   
                   {/* Name Field - Only for Sign Up */}
                   {isSignUp && (
@@ -244,34 +244,34 @@ const LoginScreen: React.FC<LoginScreenProps> = ({ onLogin }) => {
               </div>
             </div>
 
-            {/* Right Column - Promotional Panel */}
-            <div className="flex-1 bg-gradient-to-br from-blue-600 to-blue-800 text-white p-8 lg:p-12 flex flex-col justify-center items-center text-center lg:order-last order-first">
+            {/* Right Column - Promotional Panel - Mobile optimized */}
+            <div className="flex-1 bg-gradient-to-br from-blue-600 to-blue-800 text-white p-6 sm:p-8 lg:p-12 flex flex-col justify-center items-center text-center lg:order-last order-first">
               <div className="max-w-sm">
                 
-                {/* Logo/Image */}
-                <div className="mb-8">
+                {/* Logo/Image - Responsive sizing */}
+                <div className="mb-6 sm:mb-8">
                   <img 
                     src={pcpLogoNew} 
                     alt="PCP Lite - Sistema de Planejamento e Controle da Produção" 
-                    className="mx-auto max-w-full h-auto max-h-48"
+                    className="mx-auto max-w-full h-auto max-h-32 sm:max-h-40 md:max-h-48"
                   />
                 </div>
 
-                {/* Content */}
-                <div className="mb-8">
-                  <h2 className="text-2xl font-bold mb-4">
+                {/* Content - Responsive text */}
+                <div className="mb-6 sm:mb-8">
+                  <h2 className="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">
                     {isSignUp ? 'Bem-vindo de volta!' : 'Bem-vindo!'}
                   </h2>
-                  <p className="text-white/90 leading-relaxed">
+                  <p className="text-sm sm:text-base text-white/90 leading-relaxed">
                     PCP Lite — Sistema de Planejamento e Controle da Produção com fluxos, dashboards e checklists para gestão completa
                   </p>
                 </div>
 
-                {/* Toggle Button */}
+                {/* Toggle Button - Responsive */}
                 <Button
                   type="button"
                   variant="outline"
-                  className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-3 rounded-full font-medium transition-all duration-200 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-700"
+                  className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-blue-600 px-6 sm:px-8 py-2.5 sm:py-3 rounded-full font-medium transition-all duration-200 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-700 w-full sm:w-auto"
                   onClick={toggleMode}
                   disabled={isLoading}
                 >

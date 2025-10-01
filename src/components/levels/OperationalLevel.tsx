@@ -72,16 +72,16 @@ const OperationalLevel = ({ onPrevious }: OperationalLevelProps) => {
   };
 
   return (
-    <div className="py-8">
-      <div className="text-center mb-8">
-        <div className="inline-flex items-center gap-2 bg-operational/10 text-operational px-4 py-2 rounded-full text-sm font-medium mb-4">
-          <Wrench className="h-4 w-4" />
+    <div className="py-4 sm:py-6 md:py-8">
+      <div className="text-center mb-6 sm:mb-8">
+        <div className="inline-flex items-center gap-2 bg-operational/10 text-operational px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium mb-3 sm:mb-4">
+          <Wrench className="h-3 w-3 sm:h-4 sm:w-4" />
           Nível Operacional
         </div>
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4 px-4">
           Execução Operacional
         </h2>
-        <p className="text-muted-foreground max-w-2xl mx-auto">
+        <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto px-4">
           Definição de produção por máquina e acompanhamento em tempo real
         </p>
       </div>
@@ -91,7 +91,7 @@ const OperationalLevel = ({ onPrevious }: OperationalLevelProps) => {
         <TimelineDiagram />
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-8 mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mb-6 sm:mb-8">
         {/* Definição por Máquina */}
         <Card className="shadow-lg">
           <CardHeader>
@@ -154,10 +154,10 @@ const OperationalLevel = ({ onPrevious }: OperationalLevelProps) => {
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
               {dashboardMetrics.map((metric, index) => (
                 <div key={index} className="p-3 border rounded-lg text-center">
-                  <div className="text-2xl font-bold text-operational mb-1">
+                  <div className="text-xl sm:text-2xl font-bold text-operational mb-1">
                     {metric.value}
                   </div>
                   <div className="text-xs text-muted-foreground mb-2">
@@ -226,10 +226,10 @@ const OperationalLevel = ({ onPrevious }: OperationalLevelProps) => {
         </Card>
       </div>
 
-      {/* Navigation Button */}
+      {/* Navigation Button - Mobile optimized */}
       {onPrevious && (
-        <div className="text-left">
-          <Button variant="outline" onClick={onPrevious}>
+        <div className="text-left mt-6 sm:mt-8">
+          <Button variant="outline" onClick={onPrevious} className="w-full sm:w-auto">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Voltar ao Nível Tático
           </Button>
