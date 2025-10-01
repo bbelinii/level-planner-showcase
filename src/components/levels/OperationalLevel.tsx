@@ -72,62 +72,62 @@ const OperationalLevel = ({ onPrevious }: OperationalLevelProps) => {
   };
 
   return (
-    <div className="py-1 h-screen overflow-hidden flex flex-col">
-      <div className="text-center mb-1">
-        <div className="inline-flex items-center gap-1.5 bg-operational/10 text-operational px-2.5 py-0.5 rounded-full text-xs font-medium mb-1">
-          <Wrench className="h-3 w-3" />
+    <div className="py-3 h-screen overflow-hidden flex flex-col">
+      <div className="text-center mb-3">
+        <div className="inline-flex items-center gap-2 bg-operational/10 text-operational px-3 py-1 rounded-full text-sm font-medium mb-2">
+          <Wrench className="h-4 w-4" />
           Nível Operacional
         </div>
-        <h2 className="text-lg font-bold mb-0.5">
+        <h2 className="text-2xl font-bold mb-1">
           Execução Operacional
         </h2>
-        <p className="text-[10px] text-muted-foreground">
+        <p className="text-sm text-muted-foreground">
           Produção por máquina e acompanhamento
         </p>
       </div>
 
       {/* Timeline Diagram */}
-      <div className="mb-1">
+      <div className="mb-3">
         <TimelineDiagram />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 mb-1 flex-1 overflow-hidden">
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-3 mb-2 flex-1 overflow-hidden">
         {/* Definição por Máquina */}
         <Card className="shadow-lg">
-          <CardHeader className="p-2">
-            <CardTitle className="flex items-center gap-1.5 text-sm">
-              <Wrench className="h-3.5 w-3.5 text-operational" />
+          <CardHeader className="p-3">
+            <CardTitle className="flex items-center gap-2 text-base">
+              <Wrench className="h-4 w-4 text-operational" />
               Máquinas
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-2 pt-0">
-            <div className="flex gap-1 mb-2 overflow-x-auto">
+          <CardContent className="p-3 pt-0">
+            <div className="flex gap-2 mb-3 overflow-x-auto">
               {Object.keys(machineProduction).map((machine) => (
                 <Button
                   key={machine}
                   variant={selectedMachine === machine ? "default" : "outline"}
                   size="sm"
                   onClick={() => setSelectedMachine(machine)}
-                  className={`text-[10px] h-6 px-2 whitespace-nowrap ${selectedMachine === machine ? "bg-operational text-operational-foreground" : ""}`}
+                  className={`text-xs h-7 px-3 whitespace-nowrap ${selectedMachine === machine ? "bg-operational text-operational-foreground" : ""}`}
                 >
-                  {machine.split(' ')[0]}
+                  {machine.split(' ').slice(0,2).join(' ')}
                 </Button>
               ))}
             </div>
 
-            <div className="space-y-1.5">
+            <div className="space-y-2">
               {machineProduction[selectedMachine as keyof typeof machineProduction].map((order, index) => (
-                <div key={index} className="p-1.5 border rounded">
+                <div key={index} className="p-2 border rounded">
                   <div className="flex items-center justify-between mb-1">
                     <div>
-                      <h4 className="font-medium text-xs">{order.order}</h4>
-                      <p className="text-[10px] text-muted-foreground">{order.sku} • {order.qty}</p>
+                      <h4 className="font-medium text-sm">{order.order}</h4>
+                      <p className="text-xs text-muted-foreground">{order.sku} • {order.qty}</p>
                     </div>
-                    <Badge variant={getStatusColor(order.status)} className="text-[9px] px-1 py-0">
+                    <Badge variant={getStatusColor(order.status)} className="text-xs px-2 py-0.5">
                       {order.status}
                     </Badge>
                   </div>
-                  <div className="text-[10px] text-muted-foreground">
+                  <div className="text-xs text-muted-foreground">
                     {order.time}
                   </div>
                 </div>
@@ -139,33 +139,33 @@ const OperationalLevel = ({ onPrevious }: OperationalLevelProps) => {
 
         {/* Dashboard de Acompanhamento */}
         <Card className="shadow-lg">
-          <CardHeader className="p-2">
-            <CardTitle className="flex items-center gap-1.5 text-sm">
-              <BarChart3 className="h-3.5 w-3.5 text-operational" />
+          <CardHeader className="p-3">
+            <CardTitle className="flex items-center gap-2 text-base">
+              <BarChart3 className="h-4 w-4 text-operational" />
               Dashboard
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-2 pt-0">
-            <div className="grid grid-cols-2 gap-1.5">
+          <CardContent className="p-3 pt-0">
+            <div className="grid grid-cols-2 gap-2">
               {dashboardMetrics.map((metric, index) => (
-                <div key={index} className="p-1.5 border rounded text-center">
-                  <div className="text-base font-bold text-operational mb-0.5">
+                <div key={index} className="p-2 border rounded text-center">
+                  <div className="text-lg font-bold text-operational mb-1">
                     {metric.value}
                   </div>
-                  <div className="text-[9px] text-muted-foreground mb-1 leading-tight">
+                  <div className="text-xs text-muted-foreground mb-1 leading-tight">
                     {metric.title}
                   </div>
-                  <Badge variant={getStatusColor(metric.status)} className="text-[8px] px-1 py-0">
+                  <Badge variant={getStatusColor(metric.status)} className="text-xs px-2 py-0.5">
                     {metric.status}
                   </Badge>
                 </div>
               ))}
             </div>
             
-            <div className="mt-2 p-1.5 bg-operational/5 rounded">
-              <div className="flex items-center gap-1">
-                <CheckCircle className="h-3 w-3 text-tactical" />
-                <span className="text-[10px] font-medium">Status: OK</span>
+            <div className="mt-3 p-2 bg-operational/5 rounded">
+              <div className="flex items-center gap-2">
+                <CheckCircle className="h-4 w-4 text-tactical" />
+                <span className="text-xs font-medium">Status: OK</span>
               </div>
             </div>
           </CardContent>
@@ -173,39 +173,39 @@ const OperationalLevel = ({ onPrevious }: OperationalLevelProps) => {
 
         {/* Relatórios de Estoque */}
         <Card className="shadow-lg">
-          <CardHeader className="p-2">
-            <CardTitle className="flex items-center gap-1.5 text-sm">
-              <Package className="h-3.5 w-3.5 text-operational" />
+          <CardHeader className="p-3">
+            <CardTitle className="flex items-center gap-2 text-base">
+              <Package className="h-4 w-4 text-operational" />
               Estoque
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-2 pt-0">
-            <div className="space-y-1.5 max-h-[180px] overflow-y-auto">
+          <CardContent className="p-3 pt-0">
+            <div className="space-y-2 max-h-[200px] overflow-y-auto">
               {stockReport.slice(0, 6).map((item, index) => (
-                <div key={index} className="space-y-0.5">
+                <div key={index} className="space-y-1">
                   <div className="flex items-center justify-between">
-                    <span className="text-[10px] font-medium leading-tight">{item.item.split(' ').slice(0, 2).join(' ')}</span>
-                    <Badge variant={getStatusColor(item.status)} className="text-[8px] px-1 py-0">
+                    <span className="text-xs font-medium leading-tight">{item.item.split(' ').slice(0, 3).join(' ')}</span>
+                    <Badge variant={getStatusColor(item.status)} className="text-xs px-2 py-0.5">
                       {item.status}
                     </Badge>
                   </div>
-                  <div className="flex justify-between text-[9px] text-muted-foreground">
+                  <div className="flex justify-between text-xs text-muted-foreground">
                     <span>{item.current}</span>
                     <span>{item.min}-{item.max}</span>
                   </div>
                   <Progress 
                     value={getProgressValue(item.current, item.min, item.max)} 
-                    className="h-1"
+                    className="h-1.5"
                   />
                 </div>
               ))}
             </div>
             
-            <div className="flex gap-1 mt-2">
-              <Button variant="outline" className="flex-1 text-[10px] h-6">
+            <div className="flex gap-2 mt-3">
+              <Button variant="outline" className="flex-1 text-sm h-8">
                 Relatório
               </Button>
-              <Button className="flex-1 bg-operational text-operational-foreground hover:bg-operational/90 text-[10px] h-6">
+              <Button className="flex-1 bg-operational text-operational-foreground hover:bg-operational/90 text-sm h-8">
                 Reposição
               </Button>
             </div>
@@ -215,10 +215,10 @@ const OperationalLevel = ({ onPrevious }: OperationalLevelProps) => {
 
       {/* Navigation Button */}
       {onPrevious && (
-        <div className="text-left mt-1">
-          <Button variant="outline" onClick={onPrevious} size="sm" className="text-xs h-6">
-            <ArrowLeft className="mr-1 h-3 w-3" />
-            Tático
+        <div className="text-left mt-2">
+          <Button variant="outline" onClick={onPrevious} size="sm" className="text-sm h-8 px-4">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Voltar ao Tático
           </Button>
         </div>
       )}

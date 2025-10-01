@@ -35,52 +35,52 @@ const StrategicLevel = ({ onNext }: StrategicLevelProps) => {
   ];
 
   return (
-    <div className="py-1 h-screen overflow-hidden flex flex-col">
-      <div className="text-center mb-1">
-        <div className="inline-flex items-center gap-1.5 bg-strategic/10 text-strategic px-2.5 py-0.5 rounded-full text-xs font-medium mb-1">
-          <BarChart3 className="h-3 w-3" />
+    <div className="py-3 h-screen overflow-hidden flex flex-col">
+      <div className="text-center mb-3">
+        <div className="inline-flex items-center gap-2 bg-strategic/10 text-strategic px-3 py-1 rounded-full text-sm font-medium mb-2">
+          <BarChart3 className="h-4 w-4" />
           Nível Estratégico
         </div>
-        <h2 className="text-lg font-bold mb-0.5">
+        <h2 className="text-2xl font-bold mb-1">
           Planejamento Estratégico
         </h2>
-        <p className="text-[10px] text-muted-foreground">
+        <p className="text-sm text-muted-foreground">
           Análises históricas e definição de políticas
         </p>
       </div>
 
       {/* Lista de Produtos */}
-      <div className="mb-1">
+      <div className="mb-3">
         <ProductList />
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-2 mb-1 flex-1 overflow-hidden">
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-3 mb-2 flex-1 overflow-hidden">
         {/* Análises Históricas */}
         <Card className="shadow-lg">
-          <CardHeader className="p-2">
-            <CardTitle className="flex items-center gap-1.5 text-sm">
-              <TrendingUp className="h-3.5 w-3.5 text-strategic" />
+          <CardHeader className="p-3">
+            <CardTitle className="flex items-center gap-2 text-base">
+              <TrendingUp className="h-4 w-4 text-strategic" />
               Análises Históricas
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-2 pt-0">
+          <CardContent className="p-3 pt-0">
             <div className="overflow-x-auto">
-              <table className="w-full text-xs">
+              <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b">
-                    <th className="text-left p-1">Mês</th>
-                    <th className="text-right p-1">Vendas</th>
-                    <th className="text-right p-1">Est.</th>
-                    <th className="text-right p-1">Cap.</th>
+                    <th className="text-left p-2">Mês</th>
+                    <th className="text-right p-2">Vendas</th>
+                    <th className="text-right p-2">Estoque</th>
+                    <th className="text-right p-2">Cap.</th>
                   </tr>
                 </thead>
                 <tbody>
                   {salesData.map((item, index) => (
                     <tr key={index} className="border-b hover:bg-muted/50">
-                      <td className="p-1 font-medium">{item.month}</td>
-                      <td className="p-1 text-right">{(item.sales/1000).toFixed(0)}k</td>
-                      <td className="p-1 text-right">{(item.stock/1000).toFixed(1)}k</td>
-                      <td className="p-1 text-right">{item.capacity}%</td>
+                      <td className="p-2 font-medium">{item.month}</td>
+                      <td className="p-2 text-right">{(item.sales/1000).toFixed(0)}k</td>
+                      <td className="p-2 text-right">{(item.stock/1000).toFixed(1)}k</td>
+                      <td className="p-2 text-right">{item.capacity}%</td>
                     </tr>
                   ))}
                 </tbody>
@@ -91,30 +91,30 @@ const StrategicLevel = ({ onNext }: StrategicLevelProps) => {
 
         {/* Decisão Estratégica */}
         <Card className="shadow-lg">
-          <CardHeader className="p-2">
-            <CardTitle className="flex items-center gap-1.5 text-sm">
-              <Settings2 className="h-3.5 w-3.5 text-strategic" />
+          <CardHeader className="p-3">
+            <CardTitle className="flex items-center gap-2 text-base">
+              <Settings2 className="h-4 w-4 text-strategic" />
               Base para Decisão
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-2 pt-0">
-            <div className="grid grid-cols-2 gap-2">
-              <div className="p-2 border rounded-lg">
-                <h4 className="font-medium text-xs mb-1">Para Estoque</h4>
-                <ul className="text-[10px] text-muted-foreground space-y-0.5">
+          <CardContent className="p-3 pt-0">
+            <div className="grid grid-cols-2 gap-3">
+              <div className="p-3 border rounded-lg">
+                <h4 className="font-medium text-sm mb-2">Para Estoque</h4>
+                <ul className="text-xs text-muted-foreground space-y-1">
                   <li>• Demanda estável</li>
                   <li>• Produtos padrão</li>
                   <li>• Economia escala</li>
                 </ul>
               </div>
-              <div className="p-2 border rounded-lg bg-strategic/5">
-                <h4 className="font-medium text-xs mb-1">Sob Demanda</h4>
-                <ul className="text-[10px] text-muted-foreground space-y-0.5">
+              <div className="p-3 border rounded-lg bg-strategic/5">
+                <h4 className="font-medium text-sm mb-2">Sob Demanda</h4>
+                <ul className="text-xs text-muted-foreground space-y-1">
                   <li>• Demanda variável</li>
                   <li>• Customizado</li>
                   <li>• Baixo capital</li>
                 </ul>
-                <Badge className="mt-1 bg-strategic text-strategic-foreground text-[9px] px-1 py-0">
+                <Badge className="mt-2 bg-strategic text-strategic-foreground text-xs px-2 py-0.5">
                   Recomendado
                 </Badge>
               </div>
@@ -124,36 +124,36 @@ const StrategicLevel = ({ onNext }: StrategicLevelProps) => {
 
         {/* Verificação de Capacidade */}
         <Card className="shadow-lg">
-          <CardHeader className="p-2">
-            <CardTitle className="flex items-center gap-1.5 text-sm">
-              <Factory className="h-3.5 w-3.5 text-strategic" />
-              Verificação de Capacidade
+          <CardHeader className="p-3">
+            <CardTitle className="flex items-center gap-2 text-base">
+              <Factory className="h-4 w-4 text-strategic" />
+              Capacidade
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-2 pt-0">
-            <div className="space-y-2">
+          <CardContent className="p-3 pt-0">
+            <div className="space-y-3">
               <div>
-                <div className="flex justify-between text-xs mb-0.5">
+                <div className="flex justify-between text-sm mb-1">
                   <span>Máquinas</span>
                   <span className="font-medium">92%</span>
                 </div>
-                <Progress value={92} className="h-1.5" />
+                <Progress value={92} className="h-2" />
               </div>
               <div>
-                <div className="flex justify-between text-xs mb-0.5">
+                <div className="flex justify-between text-sm mb-1">
                   <span>Pessoas</span>
                   <span className="font-medium">85%</span>
                 </div>
-                <Progress value={85} className="h-1.5" />
+                <Progress value={85} className="h-2" />
               </div>
               <div>
-                <div className="flex justify-between text-xs mb-0.5">
+                <div className="flex justify-between text-sm mb-1">
                   <span>Meta Produção</span>
                   <span className="font-medium">78%</span>
                 </div>
-                <Progress value={78} className="h-1.5" />
+                <Progress value={78} className="h-2" />
               </div>
-              <div className="p-1.5 bg-tactical/5 rounded text-[10px]">
+              <div className="p-2 bg-tactical/5 rounded text-xs">
                 <span className="font-medium text-tactical">Conclusão:</span> Capacidade OK com folga de 14%
               </div>
             </div>
@@ -162,21 +162,21 @@ const StrategicLevel = ({ onNext }: StrategicLevelProps) => {
 
         {/* Geração do PMP */}
         <Card className="shadow-lg">
-          <CardHeader className="p-2">
-            <CardTitle className="flex items-center gap-1.5 text-sm">
-              <Package className="h-3.5 w-3.5 text-strategic" />
+          <CardHeader className="p-3">
+            <CardTitle className="flex items-center gap-2 text-base">
+              <Package className="h-4 w-4 text-strategic" />
               PMP
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-2 pt-0">
-            <div className="flex gap-1 mb-2">
+          <CardContent className="p-3 pt-0">
+            <div className="flex gap-2 mb-3">
               {Object.entries(scenarios).map(([key, scenario]) => (
                 <Button
                   key={key}
                   variant={selectedScenario === key ? "default" : "outline"}
                   size="sm"
                   onClick={() => setSelectedScenario(key)}
-                  className={`text-[10px] h-6 px-2 ${selectedScenario === key ? "bg-strategic text-strategic-foreground" : ""}`}
+                  className={`text-xs h-7 px-3 ${selectedScenario === key ? "bg-strategic text-strategic-foreground" : ""}`}
                 >
                   {key === 'atual' ? 'Atual' : key === 'otimista' ? '+20%' : '-20%'}
                 </Button>
@@ -184,13 +184,13 @@ const StrategicLevel = ({ onNext }: StrategicLevelProps) => {
             </div>
 
             <div className="overflow-x-auto">
-              <table className="w-full text-xs">
+              <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b">
-                    <th className="text-left p-1">Per.</th>
-                    <th className="text-right p-1">Dem.</th>
-                    <th className="text-right p-1">Prod.</th>
-                    <th className="text-center p-1">Status</th>
+                    <th className="text-left p-2">Período</th>
+                    <th className="text-right p-2">Demanda</th>
+                    <th className="text-right p-2">Produção</th>
+                    <th className="text-center p-2">Status</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -201,11 +201,11 @@ const StrategicLevel = ({ onNext }: StrategicLevelProps) => {
                     
                     return (
                       <tr key={index} className="border-b hover:bg-muted/50">
-                        <td className="p-1 font-medium">{item.period}</td>
-                        <td className="p-1 text-right">{(demand/1000).toFixed(1)}k</td>
-                        <td className="p-1 text-right">{(production/1000).toFixed(1)}k</td>
-                        <td className="p-1 text-center">
-                          <Badge variant={production >= demand ? "default" : "destructive"} className="text-[9px] px-1 py-0">
+                        <td className="p-2 font-medium">{item.period}</td>
+                        <td className="p-2 text-right">{(demand/1000).toFixed(1)}k</td>
+                        <td className="p-2 text-right">{(production/1000).toFixed(1)}k</td>
+                        <td className="p-2 text-center">
+                          <Badge variant={production >= demand ? "default" : "destructive"} className="text-xs px-2 py-0.5">
                             {production >= demand ? "OK" : "Déficit"}
                           </Badge>
                         </td>
@@ -221,14 +221,14 @@ const StrategicLevel = ({ onNext }: StrategicLevelProps) => {
 
       {/* Navigation Button */}
       {onNext && (
-        <div className="text-center mt-1">
+        <div className="text-center mt-2">
           <Button 
             onClick={onNext} 
             size="sm"
-            className="bg-strategic text-strategic-foreground hover:bg-strategic/90 text-xs h-6"
+            className="bg-strategic text-strategic-foreground hover:bg-strategic/90 text-sm h-8 px-4"
           >
-            Tático
-            <ArrowRight className="ml-1 h-3 w-3" />
+            Avançar para Tático
+            <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
         </div>
       )}

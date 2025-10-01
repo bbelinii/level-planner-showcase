@@ -117,21 +117,21 @@ const TimelineDiagram = () => {
 
   return (
     <Card className="shadow-lg">
-      <CardHeader className="p-2">
-        <CardTitle className="flex items-center gap-1.5 text-sm">
-          <Clock className="h-3.5 w-3.5 text-operational" />
+      <CardHeader className="p-3">
+        <CardTitle className="flex items-center gap-2 text-base">
+          <Clock className="h-4 w-4 text-operational" />
           Timeline de Produção
         </CardTitle>
       </CardHeader>
-      <CardContent className="p-2 pt-0">
+      <CardContent className="p-3 pt-0">
         <div className="space-y-2">
           {/* Filtros compactos */}
-          <div className="flex gap-1 flex-wrap">
+          <div className="flex gap-2 flex-wrap">
             <Button
               variant={selectedMachine === 'all' ? 'default' : 'outline'}
               size="sm"
               onClick={() => setSelectedMachine('all')}
-              className="text-[10px] h-5 px-2"
+              className="text-xs h-7 px-3"
             >
               Todas
             </Button>
@@ -141,7 +141,7 @@ const TimelineDiagram = () => {
                 variant={selectedMachine === machine ? 'default' : 'outline'}
                 size="sm"
                 onClick={() => setSelectedMachine(machine)}
-                className="text-[10px] h-5 px-2"
+                className="text-xs h-7 px-3"
               >
                 {machine.split(' ')[0]}
               </Button>
@@ -149,27 +149,27 @@ const TimelineDiagram = () => {
           </div>
 
           {/* Timeline simplificado */}
-          <div className="space-y-1">
+          <div className="space-y-2">
             {machines.slice(0, 3).map(machine => {
               const machineOperations = filteredData.filter(item => item.machine === machine);
               
               return (
-                <div key={machine} className="flex items-center gap-1">
-                  <div className="w-16 text-[9px] font-medium truncate">
+                <div key={machine} className="flex items-center gap-2">
+                  <div className="w-20 text-xs font-medium truncate">
                     {machine.split(' ')[0]}
                   </div>
-                  <div className="flex-1 relative h-6 border border-border rounded bg-muted/10">
+                  <div className="flex-1 relative h-8 border border-border rounded bg-muted/10">
                     {machineOperations.map(operation => (
                       <div
                         key={operation.id}
-                        className={`absolute h-5 m-0.5 rounded text-[8px] ${getStatusColor(operation.status)} cursor-pointer`}
+                        className={`absolute h-7 m-0.5 rounded text-xs ${getStatusColor(operation.status)} cursor-pointer`}
                         style={{
                           left: `${getTimePosition(operation.startTime)}%`,
                           width: `${getItemWidth(operation.duration)}%`
                         }}
                         title={`${operation.operation}`}
                       >
-                        <div className="px-1 flex items-center h-full">
+                        <div className="px-1.5 flex items-center h-full">
                           <span className="truncate">{operation.id}</span>
                         </div>
                       </div>
@@ -181,11 +181,11 @@ const TimelineDiagram = () => {
           </div>
 
           {/* Legenda compacta */}
-          <div className="flex gap-1 pt-1 border-t">
-            <Badge variant="default" className="text-[8px] px-1 py-0">OK</Badge>
-            <Badge variant="secondary" className="text-[8px] px-1 py-0">Ativo</Badge>
-            <Badge variant="outline" className="text-[8px] px-1 py-0">Prog.</Badge>
-            <Badge variant="destructive" className="text-[8px] px-1 py-0">Atraso</Badge>
+          <div className="flex gap-2 pt-2 border-t">
+            <Badge variant="default" className="text-xs px-2 py-0.5">OK</Badge>
+            <Badge variant="secondary" className="text-xs px-2 py-0.5">Ativo</Badge>
+            <Badge variant="outline" className="text-xs px-2 py-0.5">Prog.</Badge>
+            <Badge variant="destructive" className="text-xs px-2 py-0.5">Atraso</Badge>
           </div>
         </div>
       </CardContent>

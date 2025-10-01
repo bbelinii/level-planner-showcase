@@ -61,34 +61,34 @@ const TacticalLevel = ({ onNext, onPrevious }: TacticalLevelProps) => {
   };
 
   return (
-    <div className="py-1 h-screen overflow-hidden flex flex-col">
-      <div className="text-center mb-1">
-        <div className="inline-flex items-center gap-1.5 bg-tactical/10 text-tactical px-2.5 py-0.5 rounded-full text-xs font-medium mb-1">
-          <Settings className="h-3 w-3" />
+    <div className="py-3 h-screen overflow-hidden flex flex-col">
+      <div className="text-center mb-3">
+        <div className="inline-flex items-center gap-2 bg-tactical/10 text-tactical px-3 py-1 rounded-full text-sm font-medium mb-2">
+          <Settings className="h-4 w-4" />
           Nível Tático
         </div>
-        <h2 className="text-lg font-bold mb-0.5">
+        <h2 className="text-2xl font-bold mb-1">
           Controle Tático
         </h2>
-        <p className="text-[10px] text-muted-foreground">
+        <p className="text-sm text-muted-foreground">
           Gestão de materiais e planejamento detalhado
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-2 mb-1 flex-1 overflow-hidden">
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-3 mb-2 flex-1 overflow-hidden">
         {/* BOM - Lista de Materiais */}
         <Card className="shadow-lg">
-          <CardHeader className="p-2">
-            <CardTitle className="flex items-center gap-1.5 text-sm">
-              <Package className="h-3.5 w-3.5 text-tactical" />
+          <CardHeader className="p-3">
+            <CardTitle className="flex items-center gap-2 text-base">
+              <Package className="h-4 w-4 text-tactical" />
               BOM
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-2 pt-0">
+          <CardContent className="p-3 pt-0">
             <select 
               value={selectedSKU}
               onChange={(e) => setSelectedSKU(e.target.value)}
-              className="w-full p-1 border rounded text-xs mb-2"
+              className="w-full p-2 border rounded text-sm mb-3"
             >
               <option value="CELL001">CELL001</option>
               <option value="DRONE001">DRONE001</option>
@@ -96,18 +96,18 @@ const TacticalLevel = ({ onNext, onPrevious }: TacticalLevelProps) => {
             </select>
 
             <div className="overflow-x-auto">
-              <table className="w-full text-xs">
+              <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b">
-                    <th className="text-left p-1">Item</th>
-                    <th className="text-right p-1">Qt</th>
+                    <th className="text-left p-2">Item</th>
+                    <th className="text-right p-2">Qtd</th>
                   </tr>
                 </thead>
                 <tbody>
                   {bomData.map((item, index) => (
                     <tr key={index} className="border-b hover:bg-muted/50">
-                      <td className="p-1">{item.item.split(' ')[0]}</td>
-                      <td className="p-1 text-right">{item.quantity}</td>
+                      <td className="p-2">{item.item.split(' ').slice(0,2).join(' ')}</td>
+                      <td className="p-2 text-right">{item.quantity}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -118,30 +118,30 @@ const TacticalLevel = ({ onNext, onPrevious }: TacticalLevelProps) => {
 
         {/* Envio para Fornecedores */}
         <Card className="shadow-lg">
-          <CardHeader className="p-2">
-            <CardTitle className="flex items-center gap-1.5 text-sm">
-              <Users className="h-3.5 w-3.5 text-tactical" />
+          <CardHeader className="p-3">
+            <CardTitle className="flex items-center gap-2 text-base">
+              <Users className="h-4 w-4 text-tactical" />
               Fornecedores
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-2 pt-0">
-            <div className="space-y-1.5">
+          <CardContent className="p-3 pt-0">
+            <div className="space-y-2">
               {suppliersData.map((supplier, index) => (
-                <div key={index} className="p-1.5 border rounded">
+                <div key={index} className="p-2 border rounded">
                   <div className="flex items-center justify-between mb-1">
-                    <h4 className="font-medium text-xs">{supplier.supplier.split(' ')[0]}</h4>
-                    <Badge variant={getStatusColor(supplier.status)} className="text-[9px] px-1 py-0">
+                    <h4 className="font-medium text-sm">{supplier.supplier.split(' ')[0]}</h4>
+                    <Badge variant={getStatusColor(supplier.status)} className="text-xs px-2 py-0.5">
                       {supplier.status}
                     </Badge>
                   </div>
-                  <div className="text-[10px] text-muted-foreground">
+                  <div className="text-xs text-muted-foreground">
                     {supplier.items} itens • {supplier.lastSent}
                   </div>
                 </div>
               ))}
             </div>
             
-            <Button className="w-full bg-tactical text-tactical-foreground hover:bg-tactical/90 mt-2 text-xs h-6">
+            <Button className="w-full bg-tactical text-tactical-foreground hover:bg-tactical/90 mt-3 text-sm h-8">
               Reenviar Pendentes
             </Button>
           </CardContent>
@@ -149,39 +149,39 @@ const TacticalLevel = ({ onNext, onPrevious }: TacticalLevelProps) => {
 
         {/* Previsão de Demanda */}
         <Card className="shadow-lg">
-          <CardHeader className="p-2">
-            <CardTitle className="flex items-center gap-1.5 text-sm">
-              <Clock className="h-3.5 w-3.5 text-tactical" />
+          <CardHeader className="p-3">
+            <CardTitle className="flex items-center gap-2 text-base">
+              <Clock className="h-4 w-4 text-tactical" />
               Previsão Demanda
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-2 pt-0">
+          <CardContent className="p-3 pt-0">
             <div className="overflow-x-auto">
-              <table className="w-full text-xs">
+              <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b">
-                    <th className="text-left p-1">SKU</th>
-                    <th className="text-right p-1">S1</th>
-                    <th className="text-right p-1">S2</th>
-                    <th className="text-right p-1">S3</th>
-                    <th className="text-right p-1">S4</th>
+                    <th className="text-left p-2">SKU</th>
+                    <th className="text-right p-2">S1</th>
+                    <th className="text-right p-2">S2</th>
+                    <th className="text-right p-2">S3</th>
+                    <th className="text-right p-2">S4</th>
                   </tr>
                 </thead>
                 <tbody>
                   {demandForecast.map((item, index) => (
                     <tr key={index} className="border-b hover:bg-muted/50">
-                      <td className="p-1 font-medium">{item.sku}</td>
-                      <td className="p-1 text-right">{(item.week1/1000).toFixed(1)}k</td>
-                      <td className="p-1 text-right">{(item.week2/1000).toFixed(1)}k</td>
-                      <td className="p-1 text-right">{(item.week3/1000).toFixed(1)}k</td>
-                      <td className="p-1 text-right">{(item.week4/1000).toFixed(1)}k</td>
+                      <td className="p-2 font-medium">{item.sku}</td>
+                      <td className="p-2 text-right">{(item.week1/1000).toFixed(1)}k</td>
+                      <td className="p-2 text-right">{(item.week2/1000).toFixed(1)}k</td>
+                      <td className="p-2 text-right">{(item.week3/1000).toFixed(1)}k</td>
+                      <td className="p-2 text-right">{(item.week4/1000).toFixed(1)}k</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
             
-            <div className="mt-2 p-1.5 bg-tactical/5 rounded text-[10px]">
+            <div className="mt-3 p-2 bg-tactical/5 rounded text-xs">
               <span className="font-medium">Tendência:</span> +12% CELL001
             </div>
           </CardContent>
@@ -189,42 +189,42 @@ const TacticalLevel = ({ onNext, onPrevious }: TacticalLevelProps) => {
 
         {/* Liberação de Lotes */}
         <Card className="shadow-lg">
-          <CardHeader className="p-2">
-            <CardTitle className="flex items-center gap-1.5 text-sm">
-              <CheckCircle className="h-3.5 w-3.5 text-tactical" />
+          <CardHeader className="p-3">
+            <CardTitle className="flex items-center gap-2 text-base">
+              <CheckCircle className="h-4 w-4 text-tactical" />
               Lotes de Produção
             </CardTitle>
           </CardHeader>
-          <CardContent className="p-2 pt-0">
-            <div className="space-y-1.5">
+          <CardContent className="p-3 pt-0">
+            <div className="space-y-2">
               {productionLots.map((lot, index) => (
-                <div key={index} className="p-1.5 border rounded">
+                <div key={index} className="p-2 border rounded">
                   <div className="flex items-center justify-between mb-1">
                     <div>
-                      <h4 className="font-medium text-xs">{lot.id}</h4>
-                      <p className="text-[10px] text-muted-foreground">{lot.sku} • {lot.quantity}</p>
+                      <h4 className="font-medium text-sm">{lot.id}</h4>
+                      <p className="text-xs text-muted-foreground">{lot.sku} • {lot.quantity}</p>
                     </div>
                     <div className="flex gap-1">
-                      <Badge variant={getPriorityColor(lot.priority)} className="text-[9px] px-1 py-0">
+                      <Badge variant={getPriorityColor(lot.priority)} className="text-xs px-2 py-0.5">
                         {lot.priority}
                       </Badge>
-                      <Badge variant={getStatusColor(lot.status)} className="text-[9px] px-1 py-0">
+                      <Badge variant={getStatusColor(lot.status)} className="text-xs px-2 py-0.5">
                         {lot.status}
                       </Badge>
                     </div>
                   </div>
-                  <div className="text-[10px] text-muted-foreground">
+                  <div className="text-xs text-muted-foreground">
                     {lot.machine}
                   </div>
                 </div>
               ))}
             </div>
             
-            <div className="flex gap-1 mt-2">
-              <Button variant="outline" className="flex-1 text-xs h-6">
+            <div className="flex gap-2 mt-3">
+              <Button variant="outline" className="flex-1 text-sm h-8">
                 Programar
               </Button>
-              <Button className="flex-1 bg-tactical text-tactical-foreground hover:bg-tactical/90 text-xs h-6">
+              <Button className="flex-1 bg-tactical text-tactical-foreground hover:bg-tactical/90 text-sm h-8">
                 Liberar
               </Button>
             </div>
@@ -233,10 +233,10 @@ const TacticalLevel = ({ onNext, onPrevious }: TacticalLevelProps) => {
       </div>
 
       {/* Navigation Buttons */}
-      <div className="flex justify-between gap-2 mt-1">
+      <div className="flex justify-between gap-2 mt-2">
         {onPrevious && (
-          <Button variant="outline" onClick={onPrevious} size="sm" className="text-xs h-6">
-            <ArrowLeft className="mr-1 h-3 w-3" />
+          <Button variant="outline" onClick={onPrevious} size="sm" className="text-sm h-8 px-4">
+            <ArrowLeft className="mr-2 h-4 w-4" />
             Estratégico
           </Button>
         )}
@@ -245,10 +245,10 @@ const TacticalLevel = ({ onNext, onPrevious }: TacticalLevelProps) => {
           <Button 
             onClick={onNext} 
             size="sm"
-            className="bg-tactical text-tactical-foreground hover:bg-tactical/90 ml-auto text-xs h-6"
+            className="bg-tactical text-tactical-foreground hover:bg-tactical/90 ml-auto text-sm h-8 px-4"
           >
-            Operacional
-            <ArrowRight className="ml-1 h-3 w-3" />
+            Avançar para Operacional
+            <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
         )}
       </div>
